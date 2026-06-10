@@ -1,0 +1,18 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  focus: string;
+  practice: string;
+}
+
+const { number, title, focus, practice } = Astro.props;
+---
+
+<article class="chapter-card">
+  <span class="chapter-card__eyebrow">第 {number} 章</span>
+  <h3>{title}</h3>
+  <p><strong>重点：</strong>{focus}</p>
+  <p><strong>练习：</strong>{practice}</p>
+</article>
+

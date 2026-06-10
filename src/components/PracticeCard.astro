@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  intro: string;
+}
+
+const { title, intro } = Astro.props;
+---
+
+<section class="practice-card">
+  <h3>{title}</h3>
+  <p>{intro}</p>
+  <slot />
+</section>
+

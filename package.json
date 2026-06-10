@@ -1,0 +1,20 @@
+{
+  "name": "photograph",
+  "version": "1.0.0",
+  "description": "A GitHub Pages-ready photography course built with Astro and Starlight.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/starlight": "^0.40.0",
+    "astro": "^6.4.5"
+  }
+}
