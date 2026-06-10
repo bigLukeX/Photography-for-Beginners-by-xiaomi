@@ -105,6 +105,194 @@ body {
   padding: 1rem 1rem 1rem 1.1rem;
 }
 
+.do-dont-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.4rem 0;
+}
+
+.do-dont-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.15rem;
+  padding: 1rem 1rem 1rem 1.1rem;
+  border: 1px solid rgba(192, 130, 47, 0.18);
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(248, 242, 234, 0.88));
+  box-shadow: 0 18px 40px rgba(61, 40, 13, 0.08);
+}
+
+.do-dont-card--good {
+  border-color: rgba(77, 145, 90, 0.28);
+}
+
+.do-dont-card--bad {
+  border-color: rgba(196, 97, 74, 0.26);
+}
+
+.do-dont-card__badge {
+  display: inline-flex;
+  margin-bottom: 0.6rem;
+  padding: 0.22rem 0.56rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.do-dont-card--good .do-dont-card__badge {
+  background: rgba(85, 166, 102, 0.14);
+  color: hsl(138, 45%, 28%);
+}
+
+.do-dont-card--bad .do-dont-card__badge {
+  background: rgba(214, 110, 84, 0.14);
+  color: hsl(8, 58%, 36%);
+}
+
+.do-dont-card h3 {
+  margin: 0;
+}
+
+.do-dont-card p {
+  margin: 0.7rem 0 0;
+}
+
+.do-dont-card ul {
+  margin: 0.85rem 0 0;
+}
+
+.tip-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 1.2rem 0 1.5rem;
+}
+
+.tip-strip__item {
+  padding: 0.85rem 0.9rem;
+  border: 1px solid rgba(192, 130, 47, 0.14);
+  border-radius: 1rem;
+  background: rgba(255, 252, 247, 0.74);
+}
+
+.tip-strip__item strong,
+.frame-scan-demo__legend strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.settings-table {
+  margin: 1.2rem 0 1.5rem;
+  border: 1px solid rgba(192, 130, 47, 0.18);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.settings-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.settings-table th,
+.settings-table td {
+  padding: 0.8rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(192, 130, 47, 0.12);
+}
+
+.settings-table th {
+  background: rgba(255, 188, 93, 0.1);
+}
+
+.frame-scan-demo {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid rgba(192, 130, 47, 0.18);
+  border-radius: 1.15rem;
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(248, 242, 234, 0.88));
+  box-shadow: 0 18px 40px rgba(61, 40, 13, 0.08);
+}
+
+.frame-scan-demo__phone {
+  position: relative;
+  height: 18rem;
+  border-radius: 1.35rem;
+  overflow: hidden;
+  border: 3px solid rgba(73, 57, 36, 0.92);
+  background:
+    linear-gradient(180deg, rgba(71, 126, 191, 0.26), rgba(250, 221, 175, 0.3)),
+    linear-gradient(135deg, rgba(243, 236, 227, 0.82), rgba(226, 216, 202, 0.88));
+}
+
+.frame-scan-demo__subject,
+.frame-scan-demo__noise {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.85rem;
+  font-weight: 700;
+}
+
+.frame-scan-demo__subject {
+  inset: 28% 34% 28% 34%;
+  background: rgba(233, 170, 78, 0.86);
+  color: hsl(28, 62%, 20%);
+  box-shadow: 0 12px 24px rgba(110, 71, 20, 0.2);
+}
+
+.frame-scan-demo__noise {
+  background: rgba(61, 51, 42, 0.16);
+  color: rgba(44, 35, 28, 0.86);
+  font-size: 0.82rem;
+}
+
+.frame-scan-demo__noise--left {
+  top: 16%;
+  left: 6%;
+  width: 5rem;
+  height: 3rem;
+}
+
+.frame-scan-demo__noise--right {
+  top: 20%;
+  right: 6%;
+  width: 4.2rem;
+  height: 6rem;
+}
+
+.frame-scan-demo__noise--bottom {
+  left: 22%;
+  right: 16%;
+  bottom: 8%;
+  height: 2.6rem;
+}
+
+.frame-scan-demo__scan {
+  position: absolute;
+  inset: 8% auto 8% 50%;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.95), transparent);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.08);
+  animation: sweep 3.2s ease-in-out infinite;
+}
+
+.frame-scan-demo__legend {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+  font-size: 0.92rem;
+}
+
+.frame-scan-demo__legend span {
+  padding: 0.65rem 0.7rem;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.48);
+}
+
 .practice-card ul,
 .bridge-note ul {
   margin: 0.85rem 0 0;
@@ -129,9 +317,30 @@ body {
   }
 }
 
+@keyframes sweep {
+  0%,
+  100% {
+    transform: translateX(-10rem);
+    opacity: 0.38;
+  }
+  50% {
+    transform: translateX(10rem);
+    opacity: 0.92;
+  }
+}
+
 @media (max-width: 50rem) {
   .chapter-grid {
     grid-template-columns: 1fr;
   }
-}
 
+  .do-dont-grid,
+  .tip-strip,
+  .frame-scan-demo__legend {
+    grid-template-columns: 1fr;
+  }
+
+  .frame-scan-demo__phone {
+    height: 15rem;
+  }
+}

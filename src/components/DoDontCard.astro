@@ -1,0 +1,17 @@
+---
+interface Props {
+  mood: 'good' | 'bad';
+  title: string;
+  intro: string;
+}
+
+const { mood, title, intro } = Astro.props;
+---
+
+<section class={`do-dont-card do-dont-card--${mood}`}>
+  <div class="do-dont-card__badge">{mood === 'good' ? '推荐做法' : '常见问题'}</div>
+  <h3>{title}</h3>
+  <p>{intro}</p>
+  <slot />
+</section>
+
