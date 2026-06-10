@@ -294,7 +294,8 @@ body {
 }
 
 .composition-demo,
-.light-demo {
+.light-demo,
+.focal-demo {
   margin: 1.5rem 0;
   padding: 1rem;
   border: 1px solid rgba(192, 130, 47, 0.18);
@@ -447,6 +448,109 @@ body {
   font-size: 0.9rem;
 }
 
+.focal-demo__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.focal-demo__card {
+  padding: 0.95rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(192, 130, 47, 0.14);
+  background:
+    linear-gradient(180deg, rgba(126, 179, 225, 0.16), rgba(250, 232, 196, 0.14)),
+    rgba(255, 252, 247, 0.72);
+}
+
+.focal-demo__badge {
+  display: inline-flex;
+  margin-bottom: 0.7rem;
+  padding: 0.22rem 0.56rem;
+  border-radius: 999px;
+  background: rgba(255, 188, 93, 0.16);
+  color: hsl(28, 70%, 28%);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.focal-demo__card p {
+  margin: 0.85rem 0 0;
+}
+
+.focal-demo__scene {
+  position: relative;
+  height: 15rem;
+  overflow: hidden;
+  border-radius: 0.95rem;
+  background:
+    linear-gradient(180deg, rgba(120, 175, 229, 0.24), rgba(244, 220, 177, 0.26)),
+    linear-gradient(135deg, rgba(245, 241, 234, 0.88), rgba(227, 218, 204, 0.88));
+}
+
+.focal-demo__path,
+.focal-demo__bg,
+.focal-demo__subject {
+  position: absolute;
+}
+
+.focal-demo__path {
+  left: 10%;
+  right: 10%;
+  bottom: 14%;
+  height: 2.8rem;
+  border-radius: 999px;
+  background: rgba(95, 79, 62, 0.2);
+}
+
+.focal-demo__path--wide {
+  transform: perspective(18rem) rotateX(62deg);
+}
+
+.focal-demo__path--tele {
+  left: 22%;
+  right: 22%;
+  transform: perspective(28rem) rotateX(70deg);
+}
+
+.focal-demo__subject {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-weight: 800;
+  color: hsl(28, 62%, 20%);
+  background: rgba(233, 170, 78, 0.92);
+  box-shadow: 0 16px 24px rgba(110, 71, 20, 0.18);
+}
+
+.focal-demo__subject--wide {
+  inset: 28% 31% auto 31%;
+  height: 5.6rem;
+}
+
+.focal-demo__subject--tele {
+  inset: 34% 39% auto 39%;
+  height: 4.4rem;
+}
+
+.focal-demo__bg {
+  top: 10%;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  color: hsl(28, 38%, 28%);
+  font-weight: 700;
+}
+
+.focal-demo__bg--wide {
+  left: 8%;
+}
+
+.focal-demo__bg--tele {
+  right: 8%;
+}
+
 .practice-card ul,
 .bridge-note ul {
   margin: 0.85rem 0 0;
@@ -492,7 +596,8 @@ body {
   .tip-strip,
   .frame-scan-demo__legend,
   .composition-demo__notes,
-  .light-demo__scene {
+  .light-demo__scene,
+  .focal-demo__grid {
     grid-template-columns: 1fr;
   }
 
@@ -502,5 +607,9 @@ body {
 
   .composition-demo__frame {
     height: 15rem;
+  }
+
+  .focal-demo__scene {
+    height: 13.5rem;
   }
 }
