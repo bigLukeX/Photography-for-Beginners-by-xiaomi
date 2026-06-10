@@ -295,7 +295,8 @@ body {
 
 .composition-demo,
 .light-demo,
-.focal-demo {
+.focal-demo,
+.foundation-demo {
   margin: 1.5rem 0;
   padding: 1rem;
   border: 1px solid rgba(192, 130, 47, 0.18);
@@ -551,6 +552,112 @@ body {
   right: 8%;
 }
 
+.foundation-demo__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.foundation-demo__card {
+  padding: 0.95rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(192, 130, 47, 0.14);
+  background:
+    linear-gradient(180deg, rgba(126, 179, 225, 0.16), rgba(250, 232, 196, 0.14)),
+    rgba(255, 252, 247, 0.72);
+}
+
+.foundation-demo__badge {
+  display: inline-flex;
+  margin-bottom: 0.7rem;
+  padding: 0.22rem 0.56rem;
+  border-radius: 999px;
+  background: rgba(255, 188, 93, 0.16);
+  color: hsl(28, 70%, 28%);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.foundation-demo__card p {
+  margin: 0.85rem 0 0;
+}
+
+.foundation-demo__scene {
+  position: relative;
+  height: 15rem;
+  overflow: hidden;
+  border-radius: 0.95rem;
+  background:
+    linear-gradient(180deg, rgba(120, 175, 229, 0.24), rgba(244, 220, 177, 0.26)),
+    linear-gradient(135deg, rgba(245, 241, 234, 0.88), rgba(227, 218, 204, 0.88));
+}
+
+.foundation-demo__near,
+.foundation-demo__mid,
+.foundation-demo__far,
+.foundation-demo__focus,
+.foundation-demo__blur {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.foundation-demo__near {
+  left: 10%;
+  bottom: 14%;
+  width: 5.8rem;
+  height: 5.8rem;
+  background: rgba(233, 170, 78, 0.92);
+  color: hsl(28, 62%, 20%);
+}
+
+.foundation-demo__mid {
+  left: 39%;
+  top: 36%;
+  width: 4.6rem;
+  height: 4.6rem;
+  background: rgba(145, 112, 73, 0.78);
+  color: rgba(255, 248, 239, 0.94);
+}
+
+.foundation-demo__far {
+  right: 12%;
+  top: 18%;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: rgba(85, 82, 104, 0.62);
+  color: rgba(255, 248, 239, 0.92);
+}
+
+.foundation-demo__focus {
+  inset: 34% 34% auto 34%;
+  height: 5rem;
+  background: rgba(233, 170, 78, 0.92);
+  color: hsl(28, 62%, 20%);
+  box-shadow: 0 16px 24px rgba(110, 71, 20, 0.18);
+}
+
+.foundation-demo__blur {
+  padding: 0.5rem 0.8rem;
+  background: rgba(255, 255, 255, 0.54);
+  color: hsl(28, 38%, 28%);
+  font-weight: 700;
+  filter: blur(0.8px);
+}
+
+.foundation-demo__blur--front {
+  left: 8%;
+  bottom: 20%;
+}
+
+.foundation-demo__blur--back {
+  right: 8%;
+  top: 20%;
+}
+
 .practice-card ul,
 .bridge-note ul {
   margin: 0.85rem 0 0;
@@ -597,7 +704,8 @@ body {
   .frame-scan-demo__legend,
   .composition-demo__notes,
   .light-demo__scene,
-  .focal-demo__grid {
+  .focal-demo__grid,
+  .foundation-demo__grid {
     grid-template-columns: 1fr;
   }
 
@@ -610,6 +718,10 @@ body {
   }
 
   .focal-demo__scene {
+    height: 13.5rem;
+  }
+
+  .foundation-demo__scene {
     height: 13.5rem;
   }
 }
