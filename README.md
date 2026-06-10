@@ -1,12 +1,145 @@
 # 小米 15 Ultra 摄影教程站
 
-这是一个部署到 `GitHub Pages` 的摄影电子教程站，基于 `Astro + Starlight` 构建。
+一个面向摄影初学者的电子教程站，主题是“从一台手机开始，把摄影学扎实”。
+
+项目内容以 `小米 15 Ultra` 为起点，但教程本身并不把用户困在手机摄影技巧里，而是持续强调可以迁移到相机的摄影基础：主体、构图、光线、焦段、曝光、后期和拍摄流程。
+
+线上地址：
+
+- [教程首页](https://biglukex.github.io/Photography-for-Beginners-by-xiaomi/)
+- [第 1 章](https://biglukex.github.io/Photography-for-Beginners-by-xiaomi/chapters/01-clear-before-pretty/)
+
+## 项目目标
+
+- 做一套适合长期迭代的摄影电子教程，而不是零散笔记。
+- 用 `MDX + Astro 组件` 的方式兼顾写作效率和网页表现力。
+- 让每一章都可练、可交作业、可点评。
+- 保持“手机当前可学”和“未来迁移相机也有用”两条价值同时成立。
+
+## 当前进度
+
+已完成正式内容：
+
+- 第 1 章：先拍清楚，再拍好看
+- 第 2 章：构图入门
+- 第 3 章：学会看光
+
+已搭好结构、等待扩写：
+
+- 第 4 章到第 12 章
+- 课程目录
+- 练习与点评说明
+
+## 技术架构
+
+核心栈：
+
+- `Astro`
+- `Starlight`
+- `MDX`
+- `GitHub Pages`
+
+为什么这样选：
+
+- `Starlight` 适合文档/教程站，天然带目录、搜索、侧边导航。
+- `MDX` 适合把教程正文和交互式示意组件写在一起。
+- 站点最终输出为静态文件，适合 GitHub Pages 长期托管。
+
+## 内容架构
+
+教程目前按这条主线展开：
+
+1. 先拍清楚，再拍好看
+2. 构图入门
+3. 学会看光
+4. 小米 15 Ultra 的镜头与焦段选择
+5. 摄影通用基础：焦距、透视、景深、曝光
+6. 人像入门
+7. 街拍与抓拍
+8. 风景与城市夜景
+9. 食物与静物
+10. 手机手动模式与参数控制
+11. 手机后期、选片与色彩整理
+12. 建立自己的拍摄流程
+
+每章的设计目标基本一致：
+
+- 讲清一个核心摄影问题
+- 给出 `小米 15 Ultra` 的实战方法
+- 提供练习题
+- 提供点评标准
+- 补充“换成相机时怎么迁移”
+
+## 项目结构
+
+主要目录：
+
+- `src/content/docs/`
+  教程正文、首页、404、课程目录、练习说明
+- `src/components/`
+  教程示意组件和内容卡片
+- `src/styles/custom.css`
+  全站视觉样式、响应式规则、示意模块样式
+- `src/assets/`
+  本地插图资源
+- `public/`
+  favicon 等公开静态资源
+- `docs/`
+  项目接手说明、长期维护文档
+
+关键文件：
+
+- [astro.config.mjs](/Users/nickxy/Desktop/photograph/astro.config.mjs)
+- [src/content.config.ts](/Users/nickxy/Desktop/photograph/src/content.config.ts)
+- [src/content/docs/index.mdx](/Users/nickxy/Desktop/photograph/src/content/docs/index.mdx)
+- [src/styles/custom.css](/Users/nickxy/Desktop/photograph/src/styles/custom.css)
+- [00-摄影教程目录.md](/Users/nickxy/Desktop/photograph/00-摄影教程目录.md)
+
+## 可复用内容组件
+
+当前已经有这些组件：
+
+- `ChapterCard`
+  首页章节预览卡片
+- `PracticeCard`
+  练习任务卡片
+- `BridgeNote`
+  “迁移到相机”提示卡片
+- `DoDontCard`
+  常见错误 / 推荐做法对比卡
+- `FrameScanDemo`
+  第 1 章边缘检查示意
+- `CompositionDemo`
+  第 2 章构图示意
+- `LightDemo`
+  第 3 章光线方向示意
+
+这套组件的目标不是做成“前端组件库”，而是让教程能更稳定地扩写，避免每章都从零做页面结构。
 
 ## 本地开发
 
+安装依赖：
+
 ```bash
 npm install
+```
+
+启动开发环境：
+
+```bash
 npm run dev
+```
+
+生产构建：
+
+```bash
+npm run build
+```
+
+本地预览构建产物：
+
+```bash
+npm run preview
 ```
 
 默认开发地址通常是：
@@ -15,18 +148,47 @@ npm run dev
 http://localhost:4321
 ```
 
-## 站点结构
+## 响应式与访问方式
 
-- `src/content/docs/`：教程正文
-- `src/components/`：练习卡片、迁移提示等可复用组件
-- `src/styles/custom.css`：站点视觉样式
-- `.github/workflows/deploy.yml`：GitHub Pages 自动部署
+这个站点默认就是网页形态，所以：
 
-## 发布到 GitHub Pages
+- 手机浏览器可以直接访问
+- 平板浏览器可以直接访问
+- 桌面端会显示完整侧边栏和目录
+- 小屏设备会切成更适合阅读的单列布局
 
-1. 在 GitHub 新建一个空仓库。
-2. 把本地仓库关联到远端。
-3. 推送到 `main` 分支。
-4. 在 GitHub 仓库设置里把 Pages 的构建来源设为 `GitHub Actions`。
+当前已经实测过：
 
-这个项目的 `astro.config.mjs` 会在 GitHub Actions 环境里根据仓库名自动设置 `base` 路径，适合部署到项目仓库的 Pages 地址。
+- 手机视口：`390 x 844`
+- 平板视口：`834 x 1194`
+
+## 内容写作原则
+
+整套教程目前遵循这些原则：
+
+- 用中文写作，面向摄影初学者。
+- 讲清“为什么”，不只给“怎么按”。
+- 先讲判断，再讲设备。
+- 避免过度术语化，必要时把术语讲成人话。
+- 每章都尽量能马上练，而不是只读不拍。
+- 默认兼顾未来迁移到相机的可用性。
+
+## 推荐的后续开发顺序
+
+如果继续扩写，建议按这个顺序：
+
+1. 第 4 章：镜头与焦段选择
+2. 第 5 章：摄影通用基础
+3. 第 10 章：手机手动模式与参数控制
+4. 第 11 章：手机后期、选片与色彩整理
+5. 再补人像、街拍、夜景等题材章节
+
+这样能先把底层知识打牢，再往题材专项扩。
+
+## 接手文档
+
+如果是人类或其他 AI 要继续接手这个项目，建议先看：
+
+- [AGENTS.md](/Users/nickxy/Desktop/photograph/AGENTS.md)
+- [docs/PROJECT_OVERVIEW.md](/Users/nickxy/Desktop/photograph/docs/PROJECT_OVERVIEW.md)
+
