@@ -56,6 +56,8 @@ export default defineConfig({
             'chapters/14-blur-motion-and-slow-shutter',
             'chapters/15-odd-angles-and-fragmented-frames',
             'chapters/16-dream-light-and-unreal-color',
+            'chapters/17-style-map-and-shooting-recipes',
+            'chapters/18-personal-series-lofi-diary',
           ],
         },
       ],
