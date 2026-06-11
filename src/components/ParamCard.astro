@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  intro: string;
+}
+
+const { title, intro } = Astro.props;
+---
+
+<section class="param-card">
+  <div class="param-card__label">本章参数卡</div>
+  <h3>{title}</h3>
+  <p>{intro}</p>
+  <slot />
+</section>

@@ -44,7 +44,8 @@ body {
 
 .chapter-card,
 .practice-card,
-.bridge-note {
+.bridge-note,
+.param-card {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(192, 130, 47, 0.18);
@@ -55,7 +56,8 @@ body {
 
 .chapter-card::before,
 .practice-card::before,
-.bridge-note::before {
+.bridge-note::before,
+.param-card::before {
   content: "";
   position: absolute;
   inset: -20% auto auto -10%;
@@ -89,20 +91,68 @@ body {
 
 .chapter-card h3,
 .practice-card h3,
-.bridge-note h3 {
+.bridge-note h3,
+.param-card h3 {
   margin: 0;
 }
 
 .chapter-card p,
 .practice-card p,
-.bridge-note p {
+.bridge-note p,
+.param-card p {
   margin: 0.75rem 0 0;
 }
 
 .practice-card,
-.bridge-note {
+.bridge-note,
+.param-card {
   margin: 1.4rem 0;
   padding: 1rem 1rem 1rem 1.1rem;
+}
+
+.param-card {
+  border-color: rgba(74, 128, 188, 0.22);
+  background:
+    linear-gradient(180deg, rgba(244, 249, 252, 0.92), rgba(248, 242, 234, 0.88)),
+    rgba(255, 252, 247, 0.9);
+}
+
+.param-card__label {
+  display: inline-flex;
+  margin-bottom: 0.6rem;
+  padding: 0.22rem 0.56rem;
+  border-radius: 999px;
+  background: rgba(74, 128, 188, 0.14);
+  color: hsl(207, 45%, 31%);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.param-card table {
+  width: 100%;
+  margin-top: 0.9rem;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.param-card th,
+.param-card td {
+  padding: 0.68rem 0.72rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(74, 128, 188, 0.14);
+}
+
+.param-card th {
+  color: hsl(207, 45%, 26%);
+  background: rgba(74, 128, 188, 0.09);
+}
+
+.sl-markdown-content table {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  font-size: 0.94rem;
 }
 
 .do-dont-grid {
@@ -1671,7 +1721,8 @@ body {
 }
 
 .practice-card ul,
-.bridge-note ul {
+.bridge-note ul,
+.param-card ul {
   margin: 0.85rem 0 0;
 }
 
@@ -1821,5 +1872,13 @@ body {
 
   .style-map-demo__dot--moriyama {
     left: 32%;
+  }
+
+  .param-card {
+    overflow-x: auto;
+  }
+
+  .param-card table {
+    min-width: 36rem;
   }
 }
