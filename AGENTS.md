@@ -8,13 +8,14 @@
 
 ## 当前目标
 
-持续把占位章节扩写成正式教程页，并保持：
+持续扩写和打磨教程页，并保持：
 
 - 新手友好
 - 可练习
 - 有示意
 - 可迁移到相机
 - 手机和平板阅读体验良好
+- 高级创作篇也要落到可执行练习，而不是只堆风格词
 
 ## 关键路径
 
@@ -33,23 +34,10 @@
 
 ## 目前内容状态
 
-正式章节：
+正式章节已经覆盖：
 
-- `01-clear-before-pretty.mdx`
-- `02-composition-basics.mdx`
-- `03-learn-to-see-light.mdx`
-
-占位章节：
-
-- `04-lens-and-focal-choices.mdx`
-- `05-universal-foundations.mdx`
-- `06-portraits.mdx`
-- `07-street-and-candid.mdx`
-- `08-landscape-and-night.mdx`
-- `09-food-and-still-life.mdx`
-- `10-manual-controls.mdx`
-- `11-editing-and-selecting.mdx`
-- `12-build-a-workflow.mdx`
+- `01` 到 `12`：摄影基础、题材、参数、后期和流程
+- `13` 到 `16`：粗粝质感、失焦拖影、破碎取景、现场光梦境感
 
 ## 内容约定
 
@@ -85,6 +73,10 @@
 - `FrameScanDemo`
 - `CompositionDemo`
 - `LightDemo`
+- `GrainContrastDemo`
+- `BlurMotionDemo`
+- `OddAngleDemo`
+- `DreamLightDemo`
 
 如果新增组件，目标应该是“可在后面章节复用”，而不是只为单一页面写死。
 
@@ -163,6 +155,5 @@ npm run preview
 
 1. 读 [README.md](/Users/nickxy/Desktop/photograph/README.md)
 2. 读 [docs/PROJECT_OVERVIEW.md](/Users/nickxy/Desktop/photograph/docs/PROJECT_OVERVIEW.md)
-3. 看 `01` 到 `03` 章的写法
-4. 再开始扩写后续章节
-
+3. 看 `01`、`07`、`13`、`16` 章的写法
+4. 再开始补案例、插图、作品页或新的风格练习

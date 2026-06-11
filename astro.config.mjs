@@ -49,6 +49,15 @@ export default defineConfig({
             'chapters/12-build-a-workflow',
           ],
         },
+        {
+          label: '高级创作篇',
+          items: [
+            'chapters/13-rough-street-texture',
+            'chapters/14-blur-motion-and-slow-shutter',
+            'chapters/15-odd-angles-and-fragmented-frames',
+            'chapters/16-dream-light-and-unreal-color',
+          ],
+        },
       ],
     }),
   ],
