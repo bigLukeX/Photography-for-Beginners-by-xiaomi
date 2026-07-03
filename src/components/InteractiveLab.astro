@@ -1,0 +1,266 @@
+<section class="interactive-lab" data-photo-lab>
+  <div class="lab-grid">
+    <article class="lab-panel lab-panel--wide">
+      <div class="lab-panel__header">
+        <span class="lab-panel__kicker">SVG 实验</span>
+        <h3>焦距与站位</h3>
+        <p>拖动距离和焦距，观察主体大小、背景压缩和空间关系怎样变化。</p>
+      </div>
+      <div class="lab-perspective" style="--distance-scale: 1; --focal-scale: 1; --background-scale: 1;">
+        <svg viewBox="0 0 760 360" role="img" aria-label="焦距与站位变化示意图">
+          <defs>
+            <linearGradient id="labSky" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#c6d8dc" />
+              <stop offset="100%" stop-color="#efe0c6" />
+            </linearGradient>
+          </defs>
+          <rect width="760" height="360" rx="18" fill="url(#labSky)" />
+          <g class="lab-perspective__background">
+            <rect x="76" y="72" width="92" height="160" rx="12" fill="#76685b" opacity="0.58" />
+            <rect x="592" y="62" width="88" height="170" rx="12" fill="#4e5265" opacity="0.56" />
+            <rect x="238" y="94" width="70" height="118" rx="12" fill="#a98152" opacity="0.52" />
+            <rect x="456" y="100" width="70" height="112" rx="12" fill="#7f786e" opacity="0.5" />
+          </g>
+          <path class="lab-perspective__road" d="M 80 338 C 245 235 515 235 680 338 Z" fill="#6a5b4c" opacity="0.28" />
+          <g class="lab-perspective__subject">
+            <circle cx="380" cy="150" r="38" fill="#e9aa4e" />
+            <rect x="334" y="190" width="92" height="112" rx="34" fill="#82674e" />
+            <text x="380" y="324" text-anchor="middle" fill="#4b3520" font-size="22" font-weight="800">主体</text>
+          </g>
+          <g class="lab-perspective__camera">
+            <rect x="52" y="272" width="92" height="52" rx="14" fill="#2f2b28" opacity="0.82" />
+            <circle cx="108" cy="298" r="18" fill="#e9aa4e" />
+            <text x="98" y="350" text-anchor="middle" fill="#4b3520" font-size="16" font-weight="800">你的位置</text>
+          </g>
+        </svg>
+      </div>
+      <div class="lab-controls">
+        <label>
+          站位距离
+          <input type="range" min="0" max="100" value="35" data-lab-distance />
+        </label>
+        <label>
+          焦距倾向
+          <input type="range" min="0" max="100" value="45" data-lab-focal />
+        </label>
+      </div>
+      <p class="lab-readout" data-perspective-readout>近距离会夸张透视，长焦会收窄视角并压缩背景。</p>
+    </article>
+
+    <article class="lab-panel">
+      <div class="lab-panel__header">
+        <span class="lab-panel__kicker">Canvas 实验</span>
+        <h3>快门与拖影</h3>
+        <p>模拟 `1/250s` 到 `1/4s` 的运动痕迹，理解慢门为什么会有时间感。</p>
+      </div>
+      <canvas class="lab-canvas" width="680" height="420" data-shutter-canvas></canvas>
+      <div class="lab-controls">
+        <label>
+          快门速度
+          <input type="range" min="0" max="3" value="1" step="1" data-shutter-speed />
+        </label>
+      </div>
+      <p class="lab-readout" data-shutter-readout>当前：1/60s，轻微风险，适合站定人物和静物。</p>
+    </article>
+
+    <article class="lab-panel">
+      <div class="lab-panel__header">
+        <span class="lab-panel__kicker">Canvas 实验</span>
+        <h3>ISO、曝光与颗粒</h3>
+        <p>观察高 ISO、压暗和提亮如何改变颗粒、暗部和高光。</p>
+      </div>
+      <canvas class="lab-canvas" width="680" height="420" data-grain-canvas></canvas>
+      <div class="lab-controls lab-controls--split">
+        <label>
+          ISO
+          <input type="range" min="0" max="3" value="1" step="1" data-iso-level />
+        </label>
+        <label>
+          曝光补偿
+          <input type="range" min="-2" max="2" value="-1" step="1" data-ev-level />
+        </label>
+      </div>
+      <p class="lab-readout" data-grain-readout>ISO 400，-0.3EV：轻微颗粒，适合夜景保高光。</p>
+    </article>
+
+    <article class="lab-panel lab-panel--wide">
+      <div class="lab-panel__header">
+        <span class="lab-panel__kicker">风格实验</span>
+        <h3>白平衡与 Lofi 风格配方</h3>
+        <p>切换风格，观察色温、饱和度、反差、颗粒和高光溢出怎样组合。</p>
+      </div>
+      <div class="style-lab-frame" data-style-frame>
+        <div class="style-lab-frame__sky"></div>
+        <div class="style-lab-frame__light"></div>
+        <div class="style-lab-frame__figure"></div>
+        <div class="style-lab-frame__road"></div>
+        <div class="style-lab-frame__grain"></div>
+      </div>
+      <div class="lab-style-buttons" role="group" aria-label="风格配方选择">
+        <button type="button" data-style-preset="postpunk">post-punk</button>
+        <button type="button" data-style-preset="emo">midwest emo</button>
+        <button type="button" data-style-preset="dream">dreampop</button>
+        <button type="button" data-style-preset="shoe">shoegaze</button>
+      </div>
+      <p class="lab-readout" data-style-readout>post-punk：压暗、冷色、高反差、粗颗粒。</p>
+    </article>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector('[data-photo-lab]');
+    if (!root) return;
+
+    const distanceInput = root.querySelector('[data-lab-distance]');
+    const focalInput = root.querySelector('[data-lab-focal]');
+    const perspective = root.querySelector('.lab-perspective');
+    const perspectiveReadout = root.querySelector('[data-perspective-readout]');
+
+    const updatePerspective = () => {
+      const distance = Number(distanceInput.value);
+      const focal = Number(focalInput.value);
+      const distanceScale = 1.34 - distance * 0.0048;
+      const focalScale = 0.88 + focal * 0.0038;
+      const backgroundScale = 0.82 + focal * 0.006 - distance * 0.0022;
+      perspective.style.setProperty('--distance-scale', distanceScale.toFixed(3));
+      perspective.style.setProperty('--focal-scale', focalScale.toFixed(3));
+      perspective.style.setProperty('--background-scale', backgroundScale.toFixed(3));
+      const distanceText = distance < 35 ? '靠近主体：透视更夸张，前景和人物会更有压迫感。' : distance > 70 ? '站远一点：比例更自然，画面更冷静。' : '中等距离：人物和环境关系比较均衡。';
+      const focalText = focal > 65 ? ' 长焦倾向会压缩背景，让街景和人物贴得更近。' : focal < 35 ? ' 广角倾向会拉开空间，更容易出现边缘变形。' : ' 标准视角适合日常观察。';
+      perspectiveReadout.textContent = distanceText + focalText;
+    };
+
+    distanceInput.addEventListener('input', updatePerspective);
+    focalInput.addEventListener('input', updatePerspective);
+    updatePerspective();
+
+    const shutterCanvas = root.querySelector('[data-shutter-canvas]');
+    const shutterInput = root.querySelector('[data-shutter-speed]');
+    const shutterReadout = root.querySelector('[data-shutter-readout]');
+    const shutterLabels = ['1/250s', '1/60s', '1/15s', '1/4s'];
+    const shutterNotes = [
+      '定住动作，适合白天街拍和抓拍。',
+      '轻微风险，适合站定人物和静物。',
+      '人物开始拖开，适合模糊记忆和夜路。',
+      '明显慢门，车灯、人影和手抖都会变成画面语言。',
+    ];
+
+    const drawShutter = () => {
+      const ctx = shutterCanvas.getContext('2d');
+      const level = Number(shutterInput.value);
+      const width = shutterCanvas.width;
+      const height = shutterCanvas.height;
+      ctx.clearRect(0, 0, width, height);
+      const grad = ctx.createLinearGradient(0, 0, 0, height);
+      grad.addColorStop(0, '#273043');
+      grad.addColorStop(1, '#69534f');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(255,255,255,0.08)';
+      for (let i = 0; i < 8; i++) ctx.fillRect(40 + i * 78, 56 + (i % 3) * 22, 42, 12);
+      ctx.fillStyle = 'rgba(34,30,28,0.42)';
+      ctx.beginPath();
+      ctx.moveTo(40, height - 38);
+      ctx.bezierCurveTo(210, 250, 470, 250, 640, height - 38);
+      ctx.lineTo(640, height);
+      ctx.lineTo(40, height);
+      ctx.closePath();
+      ctx.fill();
+      const trails = [0, 2, 6, 13][level];
+      for (let i = trails; i >= 0; i--) {
+        const alpha = i === 0 ? 0.95 : 0.12 + (trails - i) * 0.035;
+        const offset = i * 12;
+        ctx.fillStyle = `rgba(233, 170, 78, ${alpha})`;
+        ctx.beginPath();
+        ctx.ellipse(348 - offset, 180, 28, 34, -0.15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = `rgba(245, 236, 222, ${alpha * 0.9})`;
+        ctx.fillRect(326 - offset, 218, 48, 96);
+      }
+      const lightAlpha = 0.28 + level * 0.18;
+      ctx.strokeStyle = `rgba(255, 222, 141, ${lightAlpha})`;
+      ctx.lineWidth = 8 + level * 5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(80, 112);
+      ctx.bezierCurveTo(230, 118 + level * 18, 420, 80 + level * 22, 620, 118);
+      ctx.stroke();
+      shutterReadout.textContent = `当前：${shutterLabels[level]}，${shutterNotes[level]}`;
+    };
+
+    shutterInput.addEventListener('input', drawShutter);
+    drawShutter();
+
+    const grainCanvas = root.querySelector('[data-grain-canvas]');
+    const isoInput = root.querySelector('[data-iso-level]');
+    const evInput = root.querySelector('[data-ev-level]');
+    const grainReadout = root.querySelector('[data-grain-readout]');
+    const isoLabels = ['ISO 100', 'ISO 400', 'ISO 800', 'ISO 1600'];
+    const evLabels = ['-1EV', '-0.7EV', '-0.3EV', '+0.3EV', '+1EV'];
+
+    const drawGrain = () => {
+      const ctx = grainCanvas.getContext('2d');
+      const width = grainCanvas.width;
+      const height = grainCanvas.height;
+      const iso = Number(isoInput.value);
+      const ev = Number(evInput.value);
+      const exposure = 1 + ev * 0.16;
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = `rgb(${Math.max(18, 42 * exposure)}, ${Math.max(20, 44 * exposure)}, ${Math.max(23, 48 * exposure)})`;
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = `rgba(255, 218, 138, ${0.48 + ev * 0.08})`;
+      ctx.beginPath();
+      ctx.arc(142, 112, 54 + ev * 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowColor = 'rgba(255, 218, 138, 0.68)';
+      ctx.shadowBlur = 28 + ev * 10;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = 'rgba(228, 166, 80, 0.72)';
+      ctx.fillRect(420, 170, 82, 142);
+      ctx.fillStyle = 'rgba(245, 236, 222, 0.58)';
+      ctx.fillRect(388, 290, 156, 34);
+      const image = ctx.getImageData(0, 0, width, height);
+      const data = image.data;
+      const grain = [8, 22, 42, 68][iso];
+      for (let i = 0; i < data.length; i += 4) {
+        const noise = (Math.random() - 0.5) * grain;
+        data[i] = Math.max(0, Math.min(255, data[i] + noise));
+        data[i + 1] = Math.max(0, Math.min(255, data[i + 1] + noise));
+        data[i + 2] = Math.max(0, Math.min(255, data[i + 2] + noise));
+      }
+      ctx.putImageData(image, 0, 0);
+      grainReadout.textContent = `${isoLabels[iso]}，${evLabels[ev + 2]}：${iso > 1 ? '颗粒更明显，适合 lofi 和粗粝夜景。' : '画面更干净，适合基础练习和真实记录。'}`;
+    };
+
+    isoInput.addEventListener('input', drawGrain);
+    evInput.addEventListener('input', drawGrain);
+    drawGrain();
+
+    const styleFrame = root.querySelector('[data-style-frame]');
+    const styleReadout = root.querySelector('[data-style-readout]');
+    const presets = {
+      postpunk: 'postpunk',
+      emo: 'emo',
+      dream: 'dream',
+      shoe: 'shoe',
+    };
+    const styleNotes = {
+      postpunk: 'post-punk：压暗、冷色、高反差、粗颗粒。',
+      emo: 'midwest emo：低饱和、柔和光线、空场和日常残响。',
+      dream: 'dreampop：柔光、高光漂浮、低清晰度和偏色记忆。',
+      shoe: 'shoegaze：拖影、溢出、颗粒和人物被光吞没。',
+    };
+    root.querySelectorAll('[data-style-preset]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const preset = presets[button.dataset.stylePreset];
+        styleFrame.dataset.style = preset;
+        styleReadout.textContent = styleNotes[preset];
+        root.querySelectorAll('[data-style-preset]').forEach((item) => item.classList.toggle('is-active', item === button));
+      });
+    });
+    const firstPreset = root.querySelector('[data-style-preset="postpunk"]');
+    firstPreset?.click();
+  })();
+</script>

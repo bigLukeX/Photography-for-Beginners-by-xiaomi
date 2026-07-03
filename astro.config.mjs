@@ -30,7 +30,7 @@ export default defineConfig({
       sidebar: [
         {
           label: '开始',
-          items: ['course-outline', 'practice-and-critiques'],
+          items: ['course-outline', 'practice-and-critiques', 'labs/interactive-lab'],
         },
         {
           label: '章节',

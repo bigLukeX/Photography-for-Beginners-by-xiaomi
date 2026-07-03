@@ -21,7 +21,7 @@
 ## 关键路径
 
 - `src/content/docs/`
-  站点内容页
+  站点内容页，包括章节、目录、练习说明和互动实验室
 - `src/components/`
   教程专用 Astro 组件
 - `src/styles/custom.css`
@@ -40,6 +40,7 @@
 - `01` 到 `12`：摄影基础、题材、参数、后期和流程
 - `13` 到 `18`：粗粝质感、失焦拖影、破碎取景、现场光梦境感、风格地图、lofi 个人系列
 - `19`：参数工具箱与拍摄配方
+- `labs/interactive-lab`：SVG + Canvas 互动实验室
 
 ## 内容约定
 
@@ -82,8 +83,11 @@
 - `OddAngleDemo`
 - `DreamLightDemo`
 - `StyleMapDemo`
+- `InteractiveLab`
 
 如果新增组件，目标应该是“可在后面章节复用”，而不是只为单一页面写死。
+
+互动实验室可以使用少量页面专用逻辑，但要保持无外部依赖优先；只有确实需要 3D 空间关系时再考虑引入 `Three.js`。
 
 ## 技术约定
 
