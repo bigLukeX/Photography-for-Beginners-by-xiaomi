@@ -42,7 +42,7 @@
 9. 拍摄流程
 10. 高级创作：粗粝、模糊、拖影、破碎取景、梦境感
 11. 参数工具箱：快门、ISO、白平衡、曝光补偿、对焦和风格配方
-12. 互动实验室：用 SVG 和 Canvas 建立参数变化的直觉
+12. 互动实验室：用 SVG、Canvas 和 Three.js 建立参数变化的直觉
 
 ## 4. 已有页面类型
 
@@ -80,6 +80,7 @@
 - `DreamLightDemo`
 - `StyleMapDemo`
 - `InteractiveLab`
+- `ThreeLab`
 
 如果继续扩写，后面很可能还需要新增：
 

@@ -1,0 +1,210 @@
+<section class="three-lab" data-three-lab>
+  <div class="three-lab__intro">
+    <span class="lab-panel__kicker">Three.js 实验</span>
+    <h3>3D 焦距、透视与光线方向</h3>
+    <p>这组实验用真正的 3D 场景演示空间关系：你能看到相机位置、视角和灯光方向如何改变主体、背景和阴影。</p>
+  </div>
+
+  <div class="lab-grid">
+    <article class="lab-panel">
+      <div class="lab-panel__header">
+        <h3>3D 焦距与透视</h3>
+        <p>改变相机距离和视角，观察背景柱子和主体之间的压缩关系。</p>
+      </div>
+      <div class="three-lab__viewport" data-three-perspective></div>
+      <div class="lab-controls lab-controls--split">
+        <label>
+          相机距离
+          <input type="range" min="3.2" max="9" value="5.2" step="0.1" data-three-distance />
+        </label>
+        <label>
+          视角宽窄
+          <input type="range" min="28" max="70" value="48" step="1" data-three-fov />
+        </label>
+      </div>
+      <p class="lab-readout" data-three-perspective-readout>距离和视角共同决定空间关系。靠近更夸张，窄视角更压缩。</p>
+    </article>
+
+    <article class="lab-panel">
+      <div class="lab-panel__header">
+        <h3>3D 光线方向</h3>
+        <p>让灯绕着主体移动，观察顺光、侧光、逆光和顶光如何改变阴影。</p>
+      </div>
+      <div class="three-lab__viewport" data-three-light></div>
+      <div class="lab-controls lab-controls--split">
+        <label>
+          光线方向
+          <input type="range" min="0" max="360" value="135" step="1" data-three-light-angle />
+        </label>
+        <label>
+          光线高度
+          <input type="range" min="1.2" max="6" value="3.2" step="0.1" data-three-light-height />
+        </label>
+      </div>
+      <p class="lab-readout" data-three-light-readout>侧逆光会让轮廓更明显，顶光会让阴影更硬。</p>
+    </article>
+  </div>
+</section>
+
+<script>
+  import * as THREE from 'three';
+
+  const labs = document.querySelectorAll('[data-three-lab]');
+
+  const makeRenderer = (container) => {
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    container.appendChild(renderer.domElement);
+    return renderer;
+  };
+
+  const addPerson = (scene, x = 0, z = 0) => {
+    const group = new THREE.Group();
+    group.position.set(x, 0, z);
+    const bodyMaterial = new THREE.MeshStandardMaterial({ color: '#8a6a4c', roughness: 0.7 });
+    const headMaterial = new THREE.MeshStandardMaterial({ color: '#e9aa4e', roughness: 0.58 });
+    const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.42, 1.2, 12, 24), bodyMaterial);
+    body.position.y = 1.05;
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.34, 32, 24), headMaterial);
+    head.position.y = 2.08;
+    body.castShadow = true;
+    head.castShadow = true;
+    group.add(body, head);
+    scene.add(group);
+    return group;
+  };
+
+  const addGround = (scene) => {
+    const ground = new THREE.Mesh(
+      new THREE.PlaneGeometry(18, 14),
+      new THREE.MeshStandardMaterial({ color: '#d8cbb8', roughness: 0.82 })
+    );
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+  };
+
+  const addBackgroundColumns = (scene) => {
+    const colors = ['#5e6172', '#a98152', '#74665d', '#4e5265', '#c4a069'];
+    [-4.2, -2, 0.5, 2.5, 4.4].forEach((x, index) => {
+      const height = 1.6 + (index % 3) * 0.55;
+      const column = new THREE.Mesh(
+        new THREE.BoxGeometry(0.62, height, 0.62),
+        new THREE.MeshStandardMaterial({ color: colors[index], roughness: 0.74 })
+      );
+      column.position.set(x, height / 2, -3.6 - (index % 2) * 0.9);
+      column.castShadow = true;
+      column.receiveShadow = true;
+      scene.add(column);
+    });
+  };
+
+  const makeBaseScene = () => {
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('#f1e8dc');
+    scene.fog = new THREE.Fog('#f1e8dc', 8, 16);
+    addGround(scene);
+    addBackgroundColumns(scene);
+    const ambient = new THREE.HemisphereLight('#f6e6c8', '#6d7480', 1.45);
+    scene.add(ambient);
+    return scene;
+  };
+
+  const setupPerspectiveLab = (root) => {
+    const container = root.querySelector('[data-three-perspective]');
+    const distanceInput = root.querySelector('[data-three-distance]');
+    const fovInput = root.querySelector('[data-three-fov]');
+    const readout = root.querySelector('[data-three-perspective-readout]');
+    if (!container || !distanceInput || !fovInput) return null;
+
+    const scene = makeBaseScene();
+    const subject = addPerson(scene);
+    const key = new THREE.DirectionalLight('#ffe0a6', 2.3);
+    key.position.set(-3, 5, 4);
+    key.castShadow = true;
+    scene.add(key);
+
+    const camera = new THREE.PerspectiveCamera(48, container.clientWidth / container.clientHeight, 0.1, 50);
+    const renderer = makeRenderer(container);
+
+    const update = () => {
+      const distance = Number(distanceInput.value);
+      const fov = Number(fovInput.value);
+      camera.fov = fov;
+      camera.position.set(0, 2.05, distance);
+      camera.lookAt(0, 1.25, -1.4);
+      camera.updateProjectionMatrix();
+      const distanceText = distance < 4.4 ? '靠近主体：近大远小更明显，空间更有冲击。' : distance > 7.2 ? '站远一点：比例更自然，画面更冷静。' : '中等距离：主体和背景关系比较均衡。';
+      const fovText = fov < 38 ? ' 窄视角像长焦，背景更像被压近。' : fov > 58 ? ' 宽视角像广角，空间被拉开。' : ' 标准视角适合日常观察。';
+      readout.textContent = distanceText + fovText;
+      subject.rotation.y = (fov - 48) * 0.005;
+      renderer.render(scene, camera);
+    };
+
+    distanceInput.addEventListener('input', update);
+    fovInput.addEventListener('input', update);
+    update();
+    return { container, renderer, camera, scene, update };
+  };
+
+  const setupLightLab = (root) => {
+    const container = root.querySelector('[data-three-light]');
+    const angleInput = root.querySelector('[data-three-light-angle]');
+    const heightInput = root.querySelector('[data-three-light-height]');
+    const readout = root.querySelector('[data-three-light-readout]');
+    if (!container || !angleInput || !heightInput) return null;
+
+    const scene = makeBaseScene();
+    addPerson(scene);
+    const lightMarker = new THREE.Mesh(
+      new THREE.SphereGeometry(0.16, 24, 16),
+      new THREE.MeshBasicMaterial({ color: '#ffd46f' })
+    );
+    scene.add(lightMarker);
+    const key = new THREE.DirectionalLight('#ffe0a6', 3);
+    key.castShadow = true;
+    scene.add(key);
+    const camera = new THREE.PerspectiveCamera(46, container.clientWidth / container.clientHeight, 0.1, 50);
+    camera.position.set(0, 2.35, 6.4);
+    camera.lookAt(0, 1.1, -0.3);
+    const renderer = makeRenderer(container);
+
+    const update = () => {
+      const angle = Number(angleInput.value) * Math.PI / 180;
+      const height = Number(heightInput.value);
+      const radius = 4;
+      key.position.set(Math.cos(angle) * radius, height, Math.sin(angle) * radius);
+      lightMarker.position.copy(key.position);
+      const normalized = ((Number(angleInput.value) % 360) + 360) % 360;
+      let note = '侧光：体积和阴影更明显。';
+      if (normalized < 45 || normalized > 315) note = '顺光：主体更清楚，但体积感较弱。';
+      if (normalized > 135 && normalized < 225) note = '逆光：轮廓更亮，人物可能变成剪影。';
+      if (height > 4.6) note += ' 光位较高，阴影会更往下压。';
+      if (height < 2) note += ' 低位光更戏剧，也更不自然。';
+      readout.textContent = note;
+      renderer.render(scene, camera);
+    };
+
+    angleInput.addEventListener('input', update);
+    heightInput.addEventListener('input', update);
+    update();
+    return { container, renderer, camera, scene, update };
+  };
+
+  labs.forEach((root) => {
+    const scenes = [setupPerspectiveLab(root), setupLightLab(root)].filter(Boolean);
+    const resize = () => {
+      scenes.forEach((item) => {
+        item.camera.aspect = item.container.clientWidth / item.container.clientHeight;
+        item.camera.updateProjectionMatrix();
+        item.renderer.setSize(item.container.clientWidth, item.container.clientHeight);
+        item.update();
+      });
+    };
+    window.addEventListener('resize', resize);
+    resize();
+  });
+</script>
