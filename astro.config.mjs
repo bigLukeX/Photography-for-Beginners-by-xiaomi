@@ -33,7 +33,7 @@ export default defineConfig({
           items: ['course-outline', 'practice-and-critiques', 'labs/interactive-lab'],
         },
         {
-          label: '补强模块',
+          label: '先修与专题',
           items: [
             'guides/00-camera-app-quickstart',
             'guides/focal-perspective-depth',
