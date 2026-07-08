@@ -33,6 +33,18 @@ export default defineConfig({
           items: ['course-outline', 'practice-and-critiques', 'labs/interactive-lab'],
         },
         {
+          label: '补强模块',
+          items: [
+            'guides/00-camera-app-quickstart',
+            'guides/focal-perspective-depth',
+            'guides/exposure-dynamic-range',
+            'guides/color-foundations',
+            'guides/post-processing-workflow',
+            'guides/photo-selection-workflow',
+            'guides/sequence-storytelling',
+          ],
+        },
+        {
           label: '章节',
           items: [
             'chapters/01-clear-before-pretty',
