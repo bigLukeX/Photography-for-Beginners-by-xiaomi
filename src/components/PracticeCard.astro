@@ -2,14 +2,21 @@
 interface Props {
   title: string;
   intro: string;
+  tiered?: boolean;
 }
 
-const { title, intro } = Astro.props;
+const { title, intro, tiered = true } = Astro.props;
 ---
 
 <section class="practice-card">
   <h3>{title}</h3>
   <p>{intro}</p>
   <slot />
+  {tiered && (
+    <div class="practice-card__modes" aria-label="作业完成层级">
+      <span><strong>20 分钟核心版</strong>只完成作业列表第 1 项，选 1 张交。</span>
+      <span><strong>完整挑战</strong>完成全部项目，最后只交 3-9 张。</span>
+      <span><strong>点评后重拍</strong>根据一条最关键反馈，回同类场景再拍 1 次。</span>
+    </div>
+  )}
 </section>
-

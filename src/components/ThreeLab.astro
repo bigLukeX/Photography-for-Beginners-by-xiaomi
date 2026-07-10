@@ -13,13 +13,13 @@
       </div>
       <div class="three-lab__viewport" data-three-perspective></div>
       <div class="lab-controls lab-controls--split">
-        <label>
+        <label for="three-distance">
           相机距离
-          <input type="range" min="3.2" max="9" value="5.2" step="0.1" data-three-distance />
+          <input id="three-distance" name="three-distance" type="range" min="3.2" max="9" value="5.2" step="0.1" data-three-distance />
         </label>
-        <label>
+        <label for="three-fov">
           视角宽窄
-          <input type="range" min="28" max="70" value="48" step="1" data-three-fov />
+          <input id="three-fov" name="three-fov" type="range" min="28" max="70" value="48" step="1" data-three-fov />
         </label>
       </div>
       <p class="lab-readout" data-three-perspective-readout>距离和视角共同决定空间关系。靠近更夸张，窄视角更压缩。</p>
@@ -32,13 +32,13 @@
       </div>
       <div class="three-lab__viewport" data-three-light></div>
       <div class="lab-controls lab-controls--split">
-        <label>
+        <label for="three-light-angle">
           光线方向
-          <input type="range" min="0" max="360" value="135" step="1" data-three-light-angle />
+          <input id="three-light-angle" name="three-light-angle" type="range" min="0" max="360" value="135" step="1" data-three-light-angle />
         </label>
-        <label>
+        <label for="three-light-height">
           光线高度
-          <input type="range" min="1.2" max="6" value="3.2" step="0.1" data-three-light-height />
+          <input id="three-light-height" name="three-light-height" type="range" min="1.2" max="6" value="3.2" step="0.1" data-three-light-height />
         </label>
       </div>
       <p class="lab-readout" data-three-light-readout>侧逆光会让轮廓更明显，顶光会让阴影更硬。</p>
@@ -47,28 +47,46 @@
 </section>
 
 <script>
-  import * as THREE from 'three';
+  const initThreeLabs = async () => {
+    const {
+      BoxGeometry,
+      CapsuleGeometry,
+      Color,
+      DirectionalLight,
+      Fog,
+      Group,
+      HemisphereLight,
+      Mesh,
+      MeshBasicMaterial,
+      MeshStandardMaterial,
+      PCFShadowMap,
+      PerspectiveCamera,
+      PlaneGeometry,
+      Scene,
+      SphereGeometry,
+      WebGLRenderer,
+    } = await import('three');
 
-  const labs = document.querySelectorAll('[data-three-lab]');
+    const labs = document.querySelectorAll('[data-three-lab]');
 
   const makeRenderer = (container) => {
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = PCFShadowMap;
     container.appendChild(renderer.domElement);
     return renderer;
   };
 
   const addPerson = (scene, x = 0, z = 0) => {
-    const group = new THREE.Group();
+    const group = new Group();
     group.position.set(x, 0, z);
-    const bodyMaterial = new THREE.MeshStandardMaterial({ color: '#8a6a4c', roughness: 0.7 });
-    const headMaterial = new THREE.MeshStandardMaterial({ color: '#e9aa4e', roughness: 0.58 });
-    const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.42, 1.2, 12, 24), bodyMaterial);
+    const bodyMaterial = new MeshStandardMaterial({ color: '#8a6a4c', roughness: 0.7 });
+    const headMaterial = new MeshStandardMaterial({ color: '#e9aa4e', roughness: 0.58 });
+    const body = new Mesh(new CapsuleGeometry(0.42, 1.2, 12, 24), bodyMaterial);
     body.position.y = 1.05;
-    const head = new THREE.Mesh(new THREE.SphereGeometry(0.34, 32, 24), headMaterial);
+    const head = new Mesh(new SphereGeometry(0.34, 32, 24), headMaterial);
     head.position.y = 2.08;
     body.castShadow = true;
     head.castShadow = true;
@@ -78,9 +96,9 @@
   };
 
   const addGround = (scene) => {
-    const ground = new THREE.Mesh(
-      new THREE.PlaneGeometry(18, 14),
-      new THREE.MeshStandardMaterial({ color: '#d8cbb8', roughness: 0.82 })
+    const ground = new Mesh(
+      new PlaneGeometry(18, 14),
+      new MeshStandardMaterial({ color: '#d8cbb8', roughness: 0.82 })
     );
     ground.rotation.x = -Math.PI / 2;
     ground.receiveShadow = true;
@@ -91,9 +109,9 @@
     const colors = ['#5e6172', '#a98152', '#74665d', '#4e5265', '#c4a069'];
     [-4.2, -2, 0.5, 2.5, 4.4].forEach((x, index) => {
       const height = 1.6 + (index % 3) * 0.55;
-      const column = new THREE.Mesh(
-        new THREE.BoxGeometry(0.62, height, 0.62),
-        new THREE.MeshStandardMaterial({ color: colors[index], roughness: 0.74 })
+      const column = new Mesh(
+        new BoxGeometry(0.62, height, 0.62),
+        new MeshStandardMaterial({ color: colors[index], roughness: 0.74 })
       );
       column.position.set(x, height / 2, -3.6 - (index % 2) * 0.9);
       column.castShadow = true;
@@ -103,12 +121,12 @@
   };
 
   const makeBaseScene = () => {
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#f1e8dc');
-    scene.fog = new THREE.Fog('#f1e8dc', 8, 16);
+    const scene = new Scene();
+    scene.background = new Color('#f1e8dc');
+    scene.fog = new Fog('#f1e8dc', 8, 16);
     addGround(scene);
     addBackgroundColumns(scene);
-    const ambient = new THREE.HemisphereLight('#f6e6c8', '#6d7480', 1.45);
+    const ambient = new HemisphereLight('#f6e6c8', '#6d7480', 1.45);
     scene.add(ambient);
     return scene;
   };
@@ -122,12 +140,12 @@
 
     const scene = makeBaseScene();
     const subject = addPerson(scene);
-    const key = new THREE.DirectionalLight('#ffe0a6', 2.3);
+    const key = new DirectionalLight('#ffe0a6', 2.3);
     key.position.set(-3, 5, 4);
     key.castShadow = true;
     scene.add(key);
 
-    const camera = new THREE.PerspectiveCamera(48, container.clientWidth / container.clientHeight, 0.1, 50);
+    const camera = new PerspectiveCamera(48, container.clientWidth / container.clientHeight, 0.1, 50);
     const renderer = makeRenderer(container);
 
     const update = () => {
@@ -159,15 +177,15 @@
 
     const scene = makeBaseScene();
     addPerson(scene);
-    const lightMarker = new THREE.Mesh(
-      new THREE.SphereGeometry(0.16, 24, 16),
-      new THREE.MeshBasicMaterial({ color: '#ffd46f' })
+    const lightMarker = new Mesh(
+      new SphereGeometry(0.16, 24, 16),
+      new MeshBasicMaterial({ color: '#ffd46f' })
     );
     scene.add(lightMarker);
-    const key = new THREE.DirectionalLight('#ffe0a6', 3);
+    const key = new DirectionalLight('#ffe0a6', 3);
     key.castShadow = true;
     scene.add(key);
-    const camera = new THREE.PerspectiveCamera(46, container.clientWidth / container.clientHeight, 0.1, 50);
+    const camera = new PerspectiveCamera(46, container.clientWidth / container.clientHeight, 0.1, 50);
     camera.position.set(0, 2.35, 6.4);
     camera.lookAt(0, 1.1, -0.3);
     const renderer = makeRenderer(container);
@@ -207,4 +225,26 @@
     window.addEventListener('resize', resize);
     resize();
   });
+
+  };
+
+  const threeLabRoot = document.querySelector('[data-three-lab]');
+  let threeLabStarted = false;
+
+  const startThreeLabs = () => {
+    if (threeLabStarted) return;
+    threeLabStarted = true;
+    void initThreeLabs().catch((error) => console.error('Three.js 实验加载失败', error));
+  };
+
+  if (threeLabRoot && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      startThreeLabs();
+    }, { rootMargin: '320px 0px' });
+    observer.observe(threeLabRoot);
+  } else if (threeLabRoot) {
+    startThreeLabs();
+  }
 </script>

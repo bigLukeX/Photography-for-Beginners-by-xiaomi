@@ -1,0 +1,176 @@
+---
+import { Image } from 'astro:assets';
+
+import leadingLines from '../assets/samples/leading-lines.jpg';
+import motion4 from '../assets/samples/motion-4.jpg';
+import motion5 from '../assets/samples/motion-5.jpg';
+import motion6 from '../assets/samples/motion-6.jpg';
+import neonRain from '../assets/samples/neon-rain.jpg';
+import nightReflection from '../assets/samples/night-reflection.jpg';
+import ordinaryStreet from '../assets/samples/ordinary-street.jpg';
+import rainWindow from '../assets/samples/rain-window.jpg';
+import rimLight from '../assets/samples/rim-light.jpg';
+import route66 from '../assets/samples/route-66.jpg';
+import sunsetSilhouette from '../assets/samples/sunset-silhouette.jpg';
+
+type SampleGroup = 'all' | 'composition' | 'light' | 'motion' | 'selection' | 'color' | 'dream' | 'style';
+
+interface Props {
+  group?: SampleGroup;
+}
+
+const { group = 'all' } = Astro.props;
+
+const samples = [
+  {
+    image: leadingLines,
+    groups: ['composition'],
+    title: '引导线和框式构图不是公式，而是观看入口',
+    alt: '连续门廊和梁柱把视线引向中央暗门的建筑照片',
+    note: '梁柱不断重复，地面和顶部线条一起指向中央暗门。真正的主体不是某根柱子，而是被线条共同强调的黑色入口。',
+    author: 'Brainwavewizard',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Architecture_of_Dept_of_Mathematics.jpg',
+    position: 'center',
+  },
+  {
+    image: route66,
+    groups: ['composition', 'color', 'style'],
+    title: '普通场景也可以靠结构和具体颜色成立',
+    alt: '美国 66 号公路向远方延伸的彩色道路照片',
+    note: '黄色中线把视线送到地平线，黑色公路与浅色荒地形成清楚分区。它没有戏剧事件，但空间、文字和颜色都很具体。',
+    author: 'Dietmar Rabich',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Amboy_(California,_USA),_Hist._Route_66_--_2012_--_1.jpg',
+    position: 'center',
+  },
+  {
+    image: sunsetSilhouette,
+    groups: ['light'],
+    title: '逆光可以保天空，也可以接受人物变成剪影',
+    alt: '夕阳海边的人物和船只剪影照片',
+    note: '曝光优先保住天空和夕阳，人物因此失去面部细节，但轮廓、姿态和码头仍然可读。这是有取舍的欠曝，不是单纯拍黑。',
+    author: 'Wilfredor',
+    license: 'CC0',
+    source: 'https://commons.wikimedia.org/wiki/File:Atardecer_en_la_Isla_de_Coche.jpg',
+    position: 'center',
+  },
+  {
+    image: rimLight,
+    groups: ['light', 'style'],
+    title: '脸不清楚时，轮廓光可以成为锚点',
+    alt: '黑色背景中人物侧脸被金色轮廓光勾勒的照片',
+    note: '画面大部分接近纯黑，但鼻梁、下巴和头发边缘留下连续亮线。看不清表情不等于没有主体，关键是仍有可辨认的结构。',
+    author: 'Molly Belle',
+    license: 'CC0',
+    source: 'https://commons.wikimedia.org/wiki/File:Molly_Belle_2016_(Unsplash).jpg',
+    position: 'center',
+  },
+  {
+    image: nightReflection,
+    groups: ['light', 'dream'],
+    title: '夜景不必把所有暗部提亮',
+    alt: '夜间庭院灯光与花坛倒映在水面的彩色照片',
+    note: '灯、花坛和倒影形成三层亮部，周围黑色负责压住画面。夜景的层次来自亮暗秩序，不是把每一处都照成白天。',
+    author: 'Dietmar Rabich',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Los_Angeles_(California,_USA),_South_Olive_Street_--_2012_--_4847.jpg',
+    position: 'center',
+  },
+  {
+    image: motion4,
+    groups: ['motion', 'selection'],
+    title: '拖影版本 A：单一运动主体，阅读最快',
+    alt: '摩托车从木门前经过并形成横向运动模糊的照片',
+    note: '背景门框保持稳定，摩托车沿水平方向拖开。观者仍能认出人物和车辆，所以模糊在描述速度，而不是遮掉所有信息。',
+    author: 'Myousry6666',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Life_in_motion_(4).jpg',
+    position: 'center',
+  },
+  {
+    image: motion5,
+    groups: ['selection'],
+    title: '拖影版本 B：颜色锚点更强',
+    alt: '穿粉色衣服的骑行者从对称木门前经过并形成拖影的照片',
+    note: '粉色上衣让主体比版本 A 更快被看见，但人物位置偏下、车体更散。选片时要比较“更醒目”和“更完整”哪一个更重要。',
+    author: 'Myousry6666',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Life_in_motion_(5).jpg',
+    position: 'center',
+  },
+  {
+    image: motion6,
+    groups: ['selection'],
+    title: '拖影版本 C：运动关系更多，也更难控制',
+    alt: '两辆摩托车同时从对称木门前经过并形成拖影的照片',
+    note: '两个运动主体产生方向和节奏，但也增加了竞争。它更有现场感，却不一定比单主体版本更清楚，这正是选片要做的判断。',
+    author: 'Myousry6666',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Life_in_motion_(6).jpg',
+    position: 'center',
+  },
+  {
+    image: neonRain,
+    groups: ['color', 'style'],
+    title: '颜色很多时，必须找到一个秩序',
+    alt: '雨夜街头大量霓虹招牌和撑伞人群的彩色照片',
+    note: '招牌颜色非常密集，下面的伞和人群提供共同方向。后期如果继续把饱和度拉高，层次会更乱；这类现场更需要控制主色和高光。',
+    author: 'Jakob Montrasio',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Advertising_and_Rain_-_Flickr_-_@yakobusan_Jakob_Montrasio.jpg',
+    position: 'center 42%',
+  },
+  {
+    image: rainWindow,
+    groups: ['dream', 'style'],
+    title: '失去清晰轮廓后，重复形状仍能维持画面',
+    alt: '同一盏灯隔着雨水玻璃形成四种发光变形的对照照片',
+    note: '雨水把灯光拆成不规则白色形状，局部已经溢出，但四格重复和大面积黑色仍然给画面骨架。梦境感来自光的变化，不只是模糊滤镜。',
+    author: 'W.carter',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Four_versions_of_a_floodlight_through_rain_on_a_window.jpg',
+    position: 'center',
+  },
+  {
+    image: ordinaryStreet,
+    groups: ['color', 'style'],
+    title: '日常观看不需要每张都有戏剧效果',
+    alt: '普通城市道路、行人、车辆和棕绿色建筑组成的彩色街景照片',
+    note: '人物、车辆、建筑和树木都很普通，颜色也不夸张。它的价值在于空间层次、时代细节和认真观看，适合训练冷静的日常观察。',
+    author: 'Frank Kidner',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Urban_Landscape_and_Scenes_of_Everyday_Life,_Aleppo_(%D8%AD%D9%84%D8%A8),_Syria_-_Street_scene_-_PHBZ024_2016_0416_-_Dumbarton_Oaks.jpg',
+    position: 'center',
+  },
+] as const;
+
+const selected = group === 'all'
+  ? samples
+  : samples.filter((sample) => sample.groups.some((sampleGroup) => sampleGroup === group));
+---
+
+<div class="sample-gallery" data-sample-group={group}>
+  {selected.map((sample) => (
+    <figure class="sample-photo">
+      <div class="sample-photo__media">
+        <Image
+          src={sample.image}
+          alt={sample.alt}
+          width={1280}
+          quality={80}
+          format="webp"
+          loading="lazy"
+          style={`object-position: ${sample.position};`}
+        />
+      </div>
+      <figcaption>
+        <strong>{sample.title}</strong>
+        <p>{sample.note}</p>
+        <small>
+          摄影：{sample.author} · <a href={sample.source}>{sample.license} / 查看原始文件</a>
+        </small>
+      </figcaption>
+    </figure>
+  ))}
+</div>

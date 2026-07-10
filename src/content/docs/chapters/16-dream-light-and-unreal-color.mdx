@@ -8,6 +8,7 @@ import BridgeNote from '../../../components/BridgeNote.astro';
 import DoDontCard from '../../../components/DoDontCard.astro';
 import DreamLightDemo from '../../../components/DreamLightDemo.astro';
 import ParamCard from '../../../components/ParamCard.astro';
+import SampleGallery from '../../../components/SampleGallery.astro';
 
 你描述的“漂浮、梦境、模糊记忆、柔和光线、不真实”，很大一部分来自光。
 
@@ -74,9 +75,15 @@ import ParamCard from '../../../components/ParamCard.astro';
 
 <DreamLightDemo />
 
+### 梦境感不是只有一种亮法
+
+夜景倒影依靠亮部层次和大片暗部成立；雨窗后的灯则依靠溢出、变形和重复成立。它们都“不完全真实”，但仍有清楚的视觉骨架。
+
+<SampleGallery group="dream" />
+
 <ParamCard title="梦境光线参数起点" intro="梦境感常常来自高光、柔光和白平衡偏移，不是简单把照片修糊。">
   <ul>
-    <li>曝光：可以试 `+0.3EV` 制造漂浮，也可以点亮部测光让局部溢出。</li>
+    <li>曝光：可以试 `+0.3EV` 制造漂浮；想让局部溢出，可对中间调或较暗区域测光后再提亮。</li>
     <li>快门：`1/60s-1/250s` 保轮廓；想更飘可以降到 `1/15s` 左右。</li>
     <li>ISO：`100-800` 起步，暗光下允许少量颗粒。</li>
     <li>白平衡：偏冷、偏青、偏粉都可以，但不要每张乱跳。</li>
@@ -88,6 +95,8 @@ import ParamCard from '../../../components/ParamCard.astro';
 初学时我们会说“高光不要炸”。
 
 但高级一点以后，你可以有条件地让一部分高光溢出。
+
+注意：点按最亮的灯牌或灯泡，手机通常会把它当成曝光参考并压暗画面，这更适合**保护高光**，不是制造溢出。想让光源溢出，可以先对人物、墙面或其他中间调测光，再向上调整曝光。
 
 适合溢出的东西：
 

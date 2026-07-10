@@ -35,13 +35,13 @@
         </svg>
       </div>
       <div class="lab-controls">
-        <label>
+        <label for="lab-distance">
           站位距离
-          <input type="range" min="0" max="100" value="35" data-lab-distance />
+          <input id="lab-distance" name="distance" type="range" min="0" max="100" value="35" data-lab-distance />
         </label>
-        <label>
+        <label for="lab-focal">
           焦距倾向
-          <input type="range" min="0" max="100" value="45" data-lab-focal />
+          <input id="lab-focal" name="focal" type="range" min="0" max="100" value="45" data-lab-focal />
         </label>
       </div>
       <p class="lab-readout" data-perspective-readout>近距离会夸张透视，长焦会收窄视角并压缩背景。</p>
@@ -53,11 +53,11 @@
         <h3>快门与拖影</h3>
         <p>模拟 `1/250s` 到 `1/4s` 的运动痕迹，理解慢门为什么会有时间感。</p>
       </div>
-      <canvas class="lab-canvas" width="680" height="420" data-shutter-canvas></canvas>
+      <canvas class="lab-canvas" width="680" height="420" role="img" aria-label="人物在不同快门速度下产生拖影的模拟画面" data-shutter-canvas></canvas>
       <div class="lab-controls">
-        <label>
+        <label for="shutter-speed">
           快门速度
-          <input type="range" min="0" max="3" value="1" step="1" data-shutter-speed />
+          <input id="shutter-speed" name="shutter-speed" type="range" min="0" max="3" value="1" step="1" data-shutter-speed />
         </label>
       </div>
       <p class="lab-readout" data-shutter-readout>当前：1/60s，轻微风险，适合站定人物和静物。</p>
@@ -69,15 +69,15 @@
         <h3>ISO、曝光与颗粒</h3>
         <p>观察高 ISO、压暗和提亮如何改变颗粒、暗部和高光。</p>
       </div>
-      <canvas class="lab-canvas" width="680" height="420" data-grain-canvas></canvas>
+      <canvas class="lab-canvas" width="680" height="420" role="img" aria-label="ISO 与曝光补偿改变亮度和颗粒的模拟画面" data-grain-canvas></canvas>
       <div class="lab-controls lab-controls--split">
-        <label>
+        <label for="iso-level">
           ISO
-          <input type="range" min="0" max="3" value="1" step="1" data-iso-level />
+          <input id="iso-level" name="iso-level" type="range" min="0" max="3" value="1" step="1" data-iso-level />
         </label>
-        <label>
+        <label for="ev-level">
           曝光补偿
-          <input type="range" min="-2" max="2" value="-1" step="1" data-ev-level />
+          <input id="ev-level" name="ev-level" type="range" min="-2" max="2" value="-1" step="1" data-ev-level />
         </label>
       </div>
       <p class="lab-readout" data-grain-readout>ISO 400，-0.3EV：轻微颗粒，适合夜景保高光。</p>
@@ -97,10 +97,10 @@
         <div class="style-lab-frame__grain"></div>
       </div>
       <div class="lab-style-buttons" role="group" aria-label="风格配方选择">
-        <button type="button" data-style-preset="postpunk">post-punk</button>
-        <button type="button" data-style-preset="emo">midwest emo</button>
-        <button type="button" data-style-preset="dream">dreampop</button>
-        <button type="button" data-style-preset="shoe">shoegaze</button>
+        <button type="button" aria-pressed="false" data-style-preset="postpunk">post-punk</button>
+        <button type="button" aria-pressed="false" data-style-preset="emo">midwest emo</button>
+        <button type="button" aria-pressed="false" data-style-preset="dream">dreampop</button>
+        <button type="button" aria-pressed="false" data-style-preset="shoe">shoegaze</button>
       </div>
       <p class="lab-readout" data-style-readout>post-punk：压暗、冷色、高反差、粗颗粒。</p>
     </article>
@@ -257,7 +257,11 @@
         const preset = presets[button.dataset.stylePreset];
         styleFrame.dataset.style = preset;
         styleReadout.textContent = styleNotes[preset];
-        root.querySelectorAll('[data-style-preset]').forEach((item) => item.classList.toggle('is-active', item === button));
+        root.querySelectorAll('[data-style-preset]').forEach((item) => {
+          const isActive = item === button;
+          item.classList.toggle('is-active', isActive);
+          item.setAttribute('aria-pressed', String(isActive));
+        });
       });
     });
     const firstPreset = root.querySelector('[data-style-preset="postpunk"]');

@@ -1,0 +1,76 @@
+---
+const stages = [
+  {
+    number: '01',
+    title: '先会拿起手机',
+    summary: '打开相机、对焦、调亮暗，完成第一次有意识拍摄。',
+    href: '../guides/00-camera-app-quickstart/',
+    action: '从这里开始',
+    topics: ['相机 App', '对焦', '曝光补偿'],
+  },
+  {
+    number: '02',
+    title: '建立视觉基础',
+    summary: '先拍清楚，再用构图和光线决定别人看见什么。',
+    href: '../chapters/01-clear-before-pretty/',
+    action: '进入第 1 章',
+    topics: ['第 1-3 章', '主体', '构图与光线'],
+  },
+  {
+    number: '03',
+    title: '理解空间与参数',
+    summary: '弄懂焦段、透视、曝光、色彩，再进入手动模式。',
+    href: '../guides/focal-perspective-depth/',
+    action: '学习焦距专题',
+    topics: ['焦距与透视', '第 4-5 章', '第 10 章'],
+  },
+  {
+    number: '04',
+    title: '进入真实题材',
+    summary: '把参数和判断用于人像、街拍、风景夜景与静物。',
+    href: '../chapters/06-portraits/',
+    action: '开始题材实战',
+    topics: ['第 6-9 章', '现场判断', '重复练习'],
+  },
+  {
+    number: '05',
+    title: '把照片做成作品',
+    summary: '选片、后期、排序和复盘，完成一次完整闭环。',
+    href: '../chapters/11-editing-and-selecting/',
+    action: '进入成片流程',
+    topics: ['第 11-12 章', '选片与后期', '组图'],
+  },
+  {
+    number: '06',
+    title: '发展个人语言',
+    summary: '先看风格地图，再练粗粝、拖影、破碎取景和梦境光。',
+    href: '../chapters/17-style-map-and-shooting-recipes/',
+    action: '打开风格地图',
+    topics: ['先第 17 章', '再第 13-16 章', '第 18-19 章'],
+  },
+] as const;
+---
+
+<nav class="course-roadmap" aria-label="课程推荐学习路线">
+  <div class="course-roadmap__start">
+    <span>第一次来？</span>
+    <strong>现在只做第 01 阶段，不必一次看完整套课程。</strong>
+  </div>
+  <ol>
+    {stages.map((stage) => (
+      <li>
+        <a href={stage.href}>
+          <span class="course-roadmap__number">{stage.number}</span>
+          <span class="course-roadmap__body">
+            <strong>{stage.title}</strong>
+            <span>{stage.summary}</span>
+            <span class="course-roadmap__topics">
+              {stage.topics.map((topic) => <small>{topic}</small>)}
+            </span>
+            <span class="course-roadmap__action">{stage.action} <span aria-hidden="true">→</span></span>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
