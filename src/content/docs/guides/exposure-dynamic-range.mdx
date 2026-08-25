@@ -6,6 +6,8 @@ description: 把曝光、动态范围、快门、ISO、曝光补偿和光圈迁�
 import PracticeCard from '../../../components/PracticeCard.astro';
 import BridgeNote from '../../../components/BridgeNote.astro';
 import ParamCard from '../../../components/ParamCard.astro';
+import GeneratedLessonVisual from '../../../components/GeneratedLessonVisual.astro';
+import exposureChoiceTriptych from '../../../assets/lessons/exposure-choice-triptych.jpg';
 
 这一页专门讲“亮暗和代价”。
 
@@ -51,6 +53,21 @@ import ParamCard from '../../../components/ParamCard.astro';
 所以基础判断不是“开不开 HDR”这么简单，而是：
 
 **这张照片我更想保高光、保脸，还是保夜晚的黑？**
+
+### 同一扇窗，没有“什么都保住”的标准答案
+
+左边优先保窗外，人物成为仍可辨认的暗轮廓；中间让人物和窗外各退一步；右边优先抬室内，代价是窗外和浅色衣服出现大片无细节白。真正的曝光判断，是先说清这张照片最重要的信息在哪里。
+
+<GeneratedLessonVisual
+  src={exposureChoiceTriptych}
+  alt="同一窗边人物分别优先保留窗外高光、折中保留人物与窗外、优先提亮室内导致窗户过曝的三联对照"
+  labels={[
+    { title: '优先保窗外', detail: '人物暗 · 轮廓仍可读' },
+    { title: '折中曝光', detail: '两边都保一点' },
+    { title: '优先保室内', detail: '人物亮 · 窗户失去细节' },
+  ]}
+  note="AI 生成的曝光取舍模拟图，只解释方向与代价，不代表手机 HDR、测光或动态范围的精确测试结果。"
+/>
 
 ## 曝光三件事：进光时间、感光代价、计算补偿
 

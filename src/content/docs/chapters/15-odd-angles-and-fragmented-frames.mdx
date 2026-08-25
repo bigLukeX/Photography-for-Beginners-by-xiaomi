@@ -8,6 +8,8 @@ import BridgeNote from '../../../components/BridgeNote.astro';
 import DoDontCard from '../../../components/DoDontCard.astro';
 import OddAngleDemo from '../../../components/OddAngleDemo.astro';
 import ParamCard from '../../../components/ParamCard.astro';
+import GeneratedLessonVisual from '../../../components/GeneratedLessonVisual.astro';
+import oddAngleTriptych from '../../../assets/lessons/odd-angle-triptych.jpg';
 
 很多初学阶段的构图训练，会让你把画面拍稳、拍正、拍完整。
 
@@ -51,6 +53,20 @@ import ParamCard from '../../../components/ParamCard.astro';
 - 贴近边缘拍：让人物像闯入或离开画面
 
 <OddAngleDemo />
+
+### 奇怪角度也要留下结构锚点
+
+左边安全、完整，也最中性；中间低机位把天花板、扶手和身体方向汇向人物，倾斜有理由；右边用玻璃、门框和反射切开人物，但脸、肩膀与空间关系仍可读。
+
+<GeneratedLessonVisual
+  src={oddAngleTriptych}
+  alt="同一楼梯间人物分别使用安全平视全身、低机位倾斜近拍和玻璃反射切割取景的三联对照"
+  labels={[
+    { title: '安全平视', detail: '完整 · 稳定 · 中性' },
+    { title: '低机位倾斜', detail: '线条有方向 · 身体有压力' },
+    { title: '玻璃切割', detail: '人物不完整 · 锚点仍可读' },
+  ]}
+/>
 
 ## 不完整人物怎么拍才成立
 

@@ -7,6 +7,8 @@ import PracticeCard from '../../../components/PracticeCard.astro';
 import BridgeNote from '../../../components/BridgeNote.astro';
 import DoDontCard from '../../../components/DoDontCard.astro';
 import FrameScanDemo from '../../../components/FrameScanDemo.astro';
+import GeneratedLessonVisual from '../../../components/GeneratedLessonVisual.astro';
+import clearSubjectTriptych from '../../../assets/lessons/clear-subject-triptych.jpg';
 
 这一章是整套教程的地基。很多照片不好看，不是因为缺器材，而是还没有先把“拍清楚”和“拍明白”做好。
 
@@ -129,6 +131,20 @@ import FrameScanDemo from '../../../components/FrameScanDemo.astro';
 - 背景里有很亮的白墙在抢戏
 
 <FrameScanDemo />
+
+### 从“拍到了”到“拍明白”
+
+下面三张不是在比较器材，而是在比较动作：第一张没稳住、没对准、边缘也乱；第二张技术上清楚了，但每个东西都在争；第三张只靠稳定、对焦、移动一步和做减法，让杯子成为明确主体。
+
+<GeneratedLessonVisual
+  src={clearSubjectTriptych}
+  alt="同一张咖啡桌从手抖失焦且杂乱、清楚但没有主次，到稳定清楚且主体明确的三联对照"
+  labels={[
+    { title: '糊且杂乱', detail: '没稳住 · 没重点' },
+    { title: '清楚但乱', detail: '技术对 · 主次错' },
+    { title: '拍明白了', detail: '稳定 · 对焦 · 减法' },
+  ]}
+/>
 
 这个动作可以简单记成：
 

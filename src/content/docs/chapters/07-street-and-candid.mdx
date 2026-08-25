@@ -8,6 +8,8 @@ import BridgeNote from '../../../components/BridgeNote.astro';
 import DoDontCard from '../../../components/DoDontCard.astro';
 import StreetMomentDemo from '../../../components/StreetMomentDemo.astro';
 import ParamCard from '../../../components/ParamCard.astro';
+import GeneratedLessonVisual from '../../../components/GeneratedLessonVisual.astro';
+import streetTimingTriptych from '../../../assets/lessons/street-timing-triptych.jpg';
 
 街拍最有意思的地方，在于它不等你准备好。
 
@@ -50,6 +52,20 @@ import ParamCard from '../../../components/ParamCard.astro';
 - 等一个人物、影子、车或反光进入那个位置
 
 <StreetMomentDemo />
+
+### 同一个位置，差一秒就是三张照片
+
+先把光框、墙面、路缘和柱子组织好，再等人物进入。中间版本成立，不只是“有人”，而是红伞、步态和亮区同时对上；左右两张分别太早和太晚。
+
+<GeneratedLessonVisual
+  src={streetTimingTriptych}
+  alt="同一街头光框中人物尚未进入、正好进入和已经走过的三次连续时机对照"
+  labels={[
+    { title: '还没进入', detail: '结构有了 · 事件没到' },
+    { title: '关系成立', detail: '姿态 · 颜色 · 光同时对上' },
+    { title: '已经错过', detail: '人物和柱子重叠' },
+  ]}
+/>
 
 ## 什么叫“关系成立”
 

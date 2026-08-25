@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface VisualLabel {
+  title: string;
+  detail: string;
+}
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  labels?: VisualLabel[];
+  note?: string;
+  eager?: boolean;
+}
+
+const {
+  src,
+  alt,
+  labels = [],
+  note = 'AI 生成的教学模拟图，用于比较拍摄选择，不是小米 15 Ultra 的实机测试或参数校准样张。',
+  eager = false,
+} = Astro.props;
+---
+
+<figure class="generated-lesson-visual">
+  <Image
+    src={src}
+    alt={alt}
+    width={src.width}
+    quality={84}
+    format="webp"
+    loading={eager ? 'eager' : 'lazy'}
+  />
+  {labels.length > 0 && (
+    <div
+      class="generated-lesson-visual__labels"
+      style={`--visual-columns: ${labels.length};`}
+      role="list"
+      aria-label="图片分栏说明"
+    >
+      {labels.map((label) => (
+        <span role="listitem">
+          <strong>{label.title}</strong>
+          {label.detail}
+        </span>
+      ))}
+    </div>
+  )}
+  <figcaption>{note}</figcaption>
+</figure>

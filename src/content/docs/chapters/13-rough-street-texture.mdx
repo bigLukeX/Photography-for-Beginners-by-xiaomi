@@ -8,6 +8,8 @@ import BridgeNote from '../../../components/BridgeNote.astro';
 import DoDontCard from '../../../components/DoDontCard.astro';
 import GrainContrastDemo from '../../../components/GrainContrastDemo.astro';
 import ParamCard from '../../../components/ParamCard.astro';
+import GeneratedLessonVisual from '../../../components/GeneratedLessonVisual.astro';
+import roughTextureTriptych from '../../../assets/lessons/rough-texture-triptych.jpg';
 
 前 12 章是在建立稳定基本功。从这一章开始，我们进入更主观的创作阶段。
 
@@ -66,6 +68,20 @@ Stephen Shore 给人的启发也不是“照着拍美国街景”，而是他让
 - 店铺灯光照到路人脸上的瞬间
 
 <GrainContrastDemo />
+
+### 粗粝不是把所有滑块拉满
+
+左边是中性、干净但较普通的成片；中间压低饱和、加深阴影并加入受控颗粒，人物轮廓、黄色墙面和斜光仍是锚点；右边则把反差、清晰度、颜色和颗粒一起推爆，已经从“粗糙”变成“信息损坏”。
+
+<GeneratedLessonVisual
+  src={roughTextureTriptych}
+  alt="同一地下通道人物从中性手机成片、受控高反差低饱和颗粒，到过度清晰和粗颗粒处理的三联对照"
+  labels={[
+    { title: '中性成片', detail: '干净 · 情绪较弱' },
+    { title: '受控粗粝', detail: '黑有层次 · 颗粒服务光线' },
+    { title: '处理过头', detail: '黑位堵死 · 边缘和噪点抢戏' },
+  ]}
+/>
 
 ## 低饱和为什么重要
 

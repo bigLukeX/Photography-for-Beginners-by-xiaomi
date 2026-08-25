@@ -8,6 +8,8 @@ import BridgeNote from '../../../components/BridgeNote.astro';
 import DoDontCard from '../../../components/DoDontCard.astro';
 import LandscapeNightDemo from '../../../components/LandscapeNightDemo.astro';
 import ParamCard from '../../../components/ParamCard.astro';
+import GeneratedLessonVisual from '../../../components/GeneratedLessonVisual.astro';
+import landscapeNightTriptych from '../../../assets/lessons/landscape-night-triptych.jpg';
 
 风景和夜景看起来是“大场面”，但真正难的不是拍大，而是拍得有重心。
 
@@ -41,6 +43,20 @@ import ParamCard from '../../../components/ParamCard.astro';
 - 画面层次没有分出来
 
 <LandscapeNightDemo />
+
+### 大场景也需要进入、停留和落点
+
+左边记录了“这里很大”，但视线没有入口。中间用栏杆和岸边建立前景，再把视线送向桥与城市；右边到了夜间，没有把每盏灯都提亮，而是让桥、主楼和水面反光形成亮部秩序。
+
+<GeneratedLessonVisual
+  src={landscapeNightTriptych}
+  alt="同一城市河景从缺少前景的宽泛记录、蓝调时刻的前中后景分层，到夜间主灯和倒影组织的三联对照"
+  labels={[
+    { title: '大但没有重点', detail: '天水平均 · 无入口' },
+    { title: '空间分层', detail: '前景带入 · 城市落点' },
+    { title: '夜景有主灯', detail: '暗部保留 · 亮部有序' },
+  ]}
+/>
 
 ## 前景不是装饰，是在帮画面立起来
 

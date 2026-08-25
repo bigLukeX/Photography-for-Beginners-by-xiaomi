@@ -2,6 +2,8 @@
 
 教程中的真实样张来自 Wikimedia Commons。所有图片都保留作者、许可和原始文件链接，站内仅用于摄影教学与画面分析。
 
+AI 生成的教学模拟图不属于第三方样张，也不列在本表中；其用途和 prompt 摘要见 [AI_IMAGE_ASSETS.md](./AI_IMAGE_ASSETS.md)。
+
 | 本地文件 | 作者 | 许可 | 原始来源 |
 | --- | --- | --- | --- |
 | `leading-lines.jpg` | Brainwavewizard | CC BY-SA 4.0 | [Architecture of Dept of Mathematics](https://commons.wikimedia.org/wiki/File:Architecture_of_Dept_of_Mathematics.jpg) |

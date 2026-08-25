@@ -6,6 +6,8 @@ description: 学会用裁切、曝光、对比、白平衡、色彩和细节控�
 import PracticeCard from '../../../components/PracticeCard.astro';
 import BridgeNote from '../../../components/BridgeNote.astro';
 import DoDontCard from '../../../components/DoDontCard.astro';
+import GeneratedLessonVisual from '../../../components/GeneratedLessonVisual.astro';
+import postProcessTriptych from '../../../assets/lessons/post-process-triptych.jpg';
 
 后期不是把废片救成神图。
 
@@ -26,6 +28,20 @@ import DoDontCard from '../../../components/DoDontCard.astro';
 7. 颗粒或风格化
 
 顺序很重要。太早拉饱和、清晰度、锐化，很容易让照片看起来“变化很大”，但不是更好。
+
+### 好后期通常不是变化最大的版本
+
+左边原片可用，只是略冷、略平并带一点边缘干扰；中间先裁切，再整理曝光、白平衡和颜色，效果不夸张但主体更明确；右边把 HDR、清晰度、饱和、暗角和锐化都推得太远，变化最大，信息反而最乱。
+
+<GeneratedLessonVisual
+  src={postProcessTriptych}
+  alt="同一街景从可用原始成片、克制整理后的完成版本，到过度饱和锐化和HDR处理的三联对照"
+  labels={[
+    { title: '可用原片', detail: '略冷略平 · 仍有基础' },
+    { title: '整理完成', detail: '裁切 · 曝光 · 颜色有序' },
+    { title: '过度处理', detail: 'HDR光晕 · 锐化和饱和过量' },
+  ]}
+/>
 
 ## 裁切：经常比滤镜更有效
 

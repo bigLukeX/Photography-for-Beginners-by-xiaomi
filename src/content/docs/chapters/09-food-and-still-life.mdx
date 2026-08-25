@@ -7,6 +7,8 @@ import PracticeCard from '../../../components/PracticeCard.astro';
 import BridgeNote from '../../../components/BridgeNote.astro';
 import DoDontCard from '../../../components/DoDontCard.astro';
 import FoodStillDemo from '../../../components/FoodStillDemo.astro';
+import GeneratedLessonVisual from '../../../components/GeneratedLessonVisual.astro';
+import foodSubtractionTriptych from '../../../assets/lessons/food-subtraction-triptych.jpg';
 
 食物和静物看起来好像题材小、难度低，但其实特别适合练摄影判断。
 
@@ -44,6 +46,20 @@ import FoodStillDemo from '../../../components/FoodStillDemo.astro';
 - 桌面上每样东西都在抢戏
 
 <FoodStillDemo />
+
+### 同一份早餐，先删再换角度
+
+左边不是“不够生活”，而是包装、手机、餐具和边缘都在抢。中间只留下盘子、杯子与布，并让窗光塑造形状；右边换到 `45°`，食物厚度和表面质感才出现。
+
+<GeneratedLessonVisual
+  src={foodSubtractionTriptych}
+  alt="同一份早餐从桌面杂乱俯拍、清理桌面后的俯拍，到使用窗边侧光的四十五度近景三联对照"
+  labels={[
+    { title: '杂乱俯拍', detail: '物件互抢 · 边缘拥挤' },
+    { title: '先做减法', detail: '颜色收拢 · 留出呼吸' },
+    { title: '换角度看质感', detail: '45° · 侧后窗光' },
+  ]}
+/>
 
 如果你只能记住一个动作，就记这个：
 

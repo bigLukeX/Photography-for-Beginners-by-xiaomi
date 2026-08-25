@@ -68,6 +68,7 @@ export default defineConfig({
             'chapters/14-blur-motion-and-slow-shutter',
             'chapters/15-odd-angles-and-fragmented-frames',
             'chapters/16-dream-light-and-unreal-color',
+            'guides/japanese-film-style',
             'chapters/18-personal-series-lofi-diary',
             'chapters/19-parameter-toolbox-and-recipes',
           ],

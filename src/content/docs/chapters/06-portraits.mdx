@@ -8,6 +8,8 @@ import BridgeNote from '../../../components/BridgeNote.astro';
 import DoDontCard from '../../../components/DoDontCard.astro';
 import PortraitDemo from '../../../components/PortraitDemo.astro';
 import ParamCard from '../../../components/ParamCard.astro';
+import GeneratedLessonVisual from '../../../components/GeneratedLessonVisual.astro';
+import portraitDistanceTriptych from '../../../assets/lessons/portrait-distance-triptych.jpg';
 
 人像是很多人最想拍、也最容易立刻获得反馈的题材。
 
@@ -48,6 +50,20 @@ import ParamCard from '../../../components/ParamCard.astro';
 - 成功率比全身高很多
 
 <PortraitDemo />
+
+### 同一个人，距离和画面任务会改变一切
+
+左边的问题不只是“脸拍大了”，而是超广角贴得太近，五官透视被夸张，树枝和楼梯也穿过头部。中间用舒服距离拍半身，人物状态最容易读；右边则主动让人物变小，用门、长椅和光线交代环境。
+
+<GeneratedLessonVisual
+  src={portraitDistanceTriptych}
+  alt="同一人物分别用贴脸超广角、自然距离半身和带环境关系的全身人像拍摄的三联对照"
+  labels={[
+    { title: '贴脸超广角', detail: '透视夸张 · 背景穿头' },
+    { title: '自然半身', detail: '距离舒服 · 状态清楚' },
+    { title: '环境人像', detail: '人变小 · 关系变多' },
+  ]}
+/>
 
 ## 人像模式什么时候好用
 
