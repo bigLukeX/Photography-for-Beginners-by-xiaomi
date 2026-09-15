@@ -3,9 +3,17 @@ interface Props {
   title: string;
   intro: string;
   tiered?: boolean;
+  core?: string;
+  challenge?: string;
+  reshoot?: string;
 }
 
-const { title, intro, tiered = true } = Astro.props;
+const {
+  title, intro, tiered = true,
+  core = '选一个拍摄问题，完成调整前后对照，保留两张并写一句取舍。',
+  challenge = '按本卡清单完成拍摄与选择，数量和成组要求以本章任务为准。',
+  reshoot = '根据一条关键反馈，只改一个变量重拍，并与初拍并排比较。',
+} = Astro.props;
 ---
 
 <section class="practice-card">
@@ -14,9 +22,9 @@ const { title, intro, tiered = true } = Astro.props;
   <slot />
   {tiered && (
     <div class="practice-card__modes" aria-label="作业完成层级">
-      <span><strong>20 分钟核心版</strong>只完成作业列表第 1 项，选 1 张交。</span>
-      <span><strong>完整挑战</strong>完成全部项目，最后只交 3-9 张。</span>
-      <span><strong>点评后重拍</strong>根据一条最关键反馈，回同类场景再拍 1 次。</span>
+      <span><strong>20 分钟核心版</strong>{core}</span>
+      <span><strong>完整挑战</strong>{challenge}</span>
+      <span><strong>点评后重拍</strong>{reshoot}</span>
     </div>
   )}
 </section>

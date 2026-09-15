@@ -20,6 +20,8 @@ AI 生成的教学模拟图不属于第三方样张，也不列在本表中；�
 
 许可证说明：
 
+后期专题复用 `route-66.jpg`，通过 `EditingWalkthrough` 在网页中演示裁切、亮度、对比与饱和度变化。该派生展示沿用 CC BY-SA 4.0，页面保留作者、原始来源、许可链接和改动说明；未生成替代场景，也未把发布的 JPEG 冒充 RAW 原片。
+
 - [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
 - [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
 - [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)

@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import ImageZoom from './ImageZoom.astro';
 
 import leadingLines from '../assets/samples/leading-lines.jpg';
 import motion4 from '../assets/samples/motion-4.jpg';
@@ -154,6 +155,7 @@ const selected = group === 'all'
   {selected.map((sample) => (
     <figure class="sample-photo">
       <div class="sample-photo__media">
+        <ImageZoom src={sample.image.src} label={`${sample.title}。摄影：${sample.author}，${sample.license}。`}>
         <Image
           src={sample.image}
           alt={sample.alt}
@@ -163,12 +165,13 @@ const selected = group === 'all'
           loading="lazy"
           style={`object-position: ${sample.position};`}
         />
+        </ImageZoom>
       </div>
       <figcaption>
         <strong>{sample.title}</strong>
         <p>{sample.note}</p>
         <small>
-          摄影：{sample.author} · <a href={sample.source}>{sample.license} / 查看原始文件</a>
+          摄影：{sample.author} · <a href={sample.source}>{sample.license} / 查看原始文件</a> · 点图放大，保留完整构图
         </small>
       </figcaption>
     </figure>

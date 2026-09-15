@@ -51,18 +51,19 @@ import portraitDistanceTriptych from '../../../assets/lessons/portrait-distance-
 
 <PortraitDemo />
 
-### 同一个人，距离和画面任务会改变一切
+### 三种人像任务的模拟示意
 
-左边的问题不只是“脸拍大了”，而是超广角贴得太近，五官透视被夸张，树枝和楼梯也穿过头部。中间用舒服距离拍半身，人物状态最容易读；右边则主动让人物变小，用门、长椅和光线交代环境。
+左图提示检查头部附近的杂线，中图提示观察半身人像的表情，右图提示给环境留下空间。它们是 AI 模拟的场景，不是同一个人的真实焦距实验，不能用五官比例反推拍摄距离。距离如何改变透视，请用焦距专题的实拍对照验证。
 
 <GeneratedLessonVisual
   src={portraitDistanceTriptych}
-  alt="同一人物分别用贴脸超广角、自然距离半身和带环境关系的全身人像拍摄的三联对照"
+  alt="AI 模拟的近距离杂乱人像、简洁半身和环境人像三种任务示意"
   labels={[
-    { title: '贴脸超广角', detail: '透视夸张 · 背景穿头' },
+    { title: '近距离取景', detail: '检查头部附近杂线' },
     { title: '自然半身', detail: '距离舒服 · 状态清楚' },
     { title: '环境人像', detail: '人变小 · 关系变多' },
   ]}
+  note="AI 教学模拟图，用于讨论背景和构图任务，不是同源实拍，也不能作为焦距或透视的测量证据。"
 />
 
 ## 人像模式什么时候好用
@@ -168,6 +169,7 @@ import portraitDistanceTriptych from '../../../assets/lessons/portrait-distance-
 4. 最后再决定普通模式还是人像模式
 
 <ParamCard title="人像参数起点" intro="人像最重要的是脸部稳定、肤色自然、背景不乱。">
+  <p>普通自动只调 EV；要指定快门就进专业模式。全手动下直接用快门、ISO 调整亮暗，不能再叠加独立 EV。人物动得更快时先加快快门，ISO 范围不是上限。</p>
   <ul>
     <li>白天或窗边：`1/125s-1/250s`，`ISO 50-400`，曝光优先保脸。</li>
     <li>阴天柔光：可以略提亮 `+0.3EV`，但注意天空和皮肤高光。</li>
@@ -231,7 +233,8 @@ import portraitDistanceTriptych from '../../../assets/lessons/portrait-distance-
 
 ## 第 6 章作业怎么拍
 
-<PracticeCard title="本章作业" intro="这章建议找同一个朋友或同一个人反复练，差异会最清楚。">
+<PracticeCard title="本章作业" intro="这章建议找同一个朋友或同一个人反复练，差异会最清楚。"
+  core="征得朋友同意，窗边拍一张半身，再只改变你的位置避开穿头杂线拍一张；保留两张比较背景。无人配合时用定时自拍。">
   <ul>
     <li>拍 3 张半身人像，要求表情自然、背景不乱。</li>
     <li>拍 3 张环境人像，要求人物和环境之间有明确关系。</li>

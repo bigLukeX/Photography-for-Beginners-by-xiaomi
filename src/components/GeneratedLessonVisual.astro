@@ -1,6 +1,7 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import ImageZoom from './ImageZoom.astro';
 
 interface VisualLabel {
   title: string;
@@ -22,18 +23,33 @@ const {
   note = 'AI 生成的教学模拟图，用于比较拍摄选择，不是小米 15 Ultra 的实机测试或参数校准样张。',
   eager = false,
 } = Astro.props;
+const isTriptych = labels.length === 3;
+const optimized = isTriptych ? await getImage({ src, width: src.width, format: 'webp', quality: 84 }) : null;
 ---
 
 <figure class="generated-lesson-visual">
-  <Image
-    src={src}
-    alt={alt}
-    width={src.width}
-    quality={84}
-    format="webp"
-    loading={eager ? 'eager' : 'lazy'}
-  />
-  {labels.length > 0 && (
+  {isTriptych ? (
+    <>
+      <p class="generated-lesson-visual__hint">三幅教学模拟图。窄屏左右滑动逐幅看，点图可放大。</p>
+      <div class="generated-lesson-visual__panels" tabindex="0" role="group" aria-label={alt}>
+        {labels.map((label, index) => (
+          <div class="generated-lesson-visual__panel">
+            <ImageZoom src={src.src} label={`AI 教学模拟：${alt}`}>
+              <svg viewBox={`${index * src.width / 3} 0 ${src.width / 3} ${src.height}`} role="img" aria-label={`${index + 1}. ${label.title}：${label.detail}`}>
+                <image href={optimized!.src} width={src.width} height={src.height} />
+              </svg>
+            </ImageZoom>
+            <p><strong>{index + 1}. {label.title}</strong>{label.detail}</p>
+          </div>
+        ))}
+      </div>
+    </>
+  ) : (
+    <ImageZoom src={src.src} label={`AI 教学模拟：${alt}`}>
+      <Image src={src} alt={alt} width={src.width} quality={84} format="webp" loading={eager ? 'eager' : 'lazy'} />
+    </ImageZoom>
+  )}
+  {!isTriptych && labels.length > 0 && (
     <div
       class="generated-lesson-visual__labels"
       style={`--visual-columns: ${labels.length};`}
@@ -48,5 +64,5 @@ const {
       ))}
     </div>
   )}
-  <figcaption>{note}</figcaption>
+  <figcaption>{note} 点图后可切换实际尺寸查看。</figcaption>
 </figure>

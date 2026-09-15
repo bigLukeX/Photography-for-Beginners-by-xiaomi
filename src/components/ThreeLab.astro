@@ -9,7 +9,7 @@
     <article class="lab-panel">
       <div class="lab-panel__header">
         <h3>3D 焦距与透视</h3>
-        <p>改变相机距离和视角，观察背景柱子和主体之间的压缩关系。</p>
+        <p>先固定距离只改视角；再勾选“保持主体大小”并后退，比较背景相对人物的变化。</p>
       </div>
       <div class="three-lab__viewport" data-three-perspective></div>
       <div class="lab-controls lab-controls--split">
@@ -19,10 +19,11 @@
         </label>
         <label for="three-fov">
           视角宽窄
-          <input id="three-fov" name="three-fov" type="range" min="28" max="70" value="48" step="1" data-three-fov />
+          <input id="three-fov" name="three-fov" type="range" min="20" max="90" value="48" step="any" data-three-fov />
         </label>
       </div>
-      <p class="lab-readout" data-three-perspective-readout>距离和视角共同决定空间关系。靠近更夸张，窄视角更压缩。</p>
+      <label class="lab-checkbox"><input type="checkbox" data-three-lock-size /> 保持主体大小（移动距离时自动配合视角）</label>
+      <p class="lab-readout" aria-live="polite" data-three-perspective-readout>固定站位只改视角，不改变前后物体的大小比例。</p>
     </article>
 
     <article class="lab-panel">
@@ -41,19 +42,21 @@
           <input id="three-light-height" name="three-light-height" type="range" min="1.2" max="6" value="3.2" step="0.1" data-three-light-height />
         </label>
       </div>
-      <p class="lab-readout" data-three-light-readout>侧逆光会让轮廓更明显，顶光会让阴影更硬。</p>
+      <p class="lab-readout" aria-live="polite" data-three-light-readout>0° 为相机一侧的顺光，180° 为主体背后的逆光。</p>
+      <p class="lab-note">高度改变阴影方向；光的软硬主要取决于光源相对主体的大小。本模型使用固定的方向光，不模拟柔光箱尺寸。</p>
     </article>
   </div>
 </section>
 
 <script>
+  import { lightDirection, lockedFieldOfView } from '../lib/photo-lab-model.mjs';
+
   const initThreeLabs = async () => {
     const {
       BoxGeometry,
       CapsuleGeometry,
       Color,
       DirectionalLight,
-      Fog,
       Group,
       HemisphereLight,
       Mesh,
@@ -123,7 +126,6 @@
   const makeBaseScene = () => {
     const scene = new Scene();
     scene.background = new Color('#f1e8dc');
-    scene.fog = new Fog('#f1e8dc', 8, 16);
     addGround(scene);
     addBackgroundColumns(scene);
     const ambient = new HemisphereLight('#f6e6c8', '#6d7480', 1.45);
@@ -135,11 +137,12 @@
     const container = root.querySelector('[data-three-perspective]');
     const distanceInput = root.querySelector('[data-three-distance]');
     const fovInput = root.querySelector('[data-three-fov]');
+    const lockSize = root.querySelector('[data-three-lock-size]');
     const readout = root.querySelector('[data-three-perspective-readout]');
     if (!container || !distanceInput || !fovInput) return null;
 
     const scene = makeBaseScene();
-    const subject = addPerson(scene);
+    addPerson(scene);
     const key = new DirectionalLight('#ffe0a6', 2.3);
     key.position.set(-3, 5, 4);
     key.castShadow = true;
@@ -147,23 +150,39 @@
 
     const camera = new PerspectiveCamera(48, container.clientWidth / container.clientHeight, 0.1, 50);
     const renderer = makeRenderer(container);
+    let referenceDistance = Number(distanceInput.value);
+    let referenceFov = Number(fovInput.value);
 
     const update = () => {
       const distance = Number(distanceInput.value);
+      if (lockSize.checked) {
+        const lockedFov = lockedFieldOfView(referenceDistance, referenceFov, distance);
+        // Expand the display range instead of silently clamping the framing lock.
+        fovInput.min = String(Math.min(20, lockedFov));
+        fovInput.max = String(Math.max(90, lockedFov));
+        fovInput.value = String(lockedFov);
+      }
+      fovInput.disabled = lockSize.checked;
       const fov = Number(fovInput.value);
       camera.fov = fov;
-      camera.position.set(0, 2.05, distance);
-      camera.lookAt(0, 1.25, -1.4);
+      camera.position.set(0, 1.25, distance);
+      camera.lookAt(0, 1.25, 0);
       camera.updateProjectionMatrix();
-      const distanceText = distance < 4.4 ? '靠近主体：近大远小更明显，空间更有冲击。' : distance > 7.2 ? '站远一点：比例更自然，画面更冷静。' : '中等距离：主体和背景关系比较均衡。';
-      const fovText = fov < 38 ? ' 窄视角像长焦，背景更像被压近。' : fov > 58 ? ' 宽视角像广角，空间被拉开。' : ' 标准视角适合日常观察。';
-      readout.textContent = distanceText + fovText;
-      subject.rotation.y = (fov - 48) * 0.005;
+      readout.textContent = '距离 ' + distance.toFixed(1) + '，垂直视角 ' + fov.toFixed(1) + '°。' + (lockSize.checked
+        ? '人物大小保持不变；向后移动时，背景相对人物变大。'
+        : '固定距离只改变视角，人物和背景一起缩放；前后大小比例不变。');
       renderer.render(scene, camera);
     };
 
     distanceInput.addEventListener('input', update);
     fovInput.addEventListener('input', update);
+    lockSize.addEventListener('change', () => {
+      if (lockSize.checked) {
+        referenceDistance = Number(distanceInput.value);
+        referenceFov = Number(fovInput.value);
+      }
+      update();
+    });
     update();
     return { container, renderer, camera, scene, update };
   };
@@ -184,7 +203,8 @@
     scene.add(lightMarker);
     const key = new DirectionalLight('#ffe0a6', 3);
     key.castShadow = true;
-    scene.add(key);
+    key.target.position.set(0, 1.2, 0);
+    scene.add(key, key.target);
     const camera = new PerspectiveCamera(46, container.clientWidth / container.clientHeight, 0.1, 50);
     camera.position.set(0, 2.35, 6.4);
     camera.lookAt(0, 1.1, -0.3);
@@ -194,14 +214,16 @@
       const angle = Number(angleInput.value) * Math.PI / 180;
       const height = Number(heightInput.value);
       const radius = 4;
-      key.position.set(Math.cos(angle) * radius, height, Math.sin(angle) * radius);
+      key.position.set(Math.sin(angle) * radius, height, Math.cos(angle) * radius);
       lightMarker.position.copy(key.position);
-      const normalized = ((Number(angleInput.value) % 360) + 360) % 360;
-      let note = '侧光：体积和阴影更明显。';
-      if (normalized < 45 || normalized > 315) note = '顺光：主体更清楚，但体积感较弱。';
-      if (normalized > 135 && normalized < 225) note = '逆光：轮廓更亮，人物可能变成剪影。';
+      const direction = lightDirection(Number(angleInput.value));
+      let note = angleInput.value + '° · ' + direction + '：' + {
+        '顺光': '光来自相机一侧，正面受光。',
+        '侧光': '光来自主体侧面，明暗分区更明显。',
+        '逆光': '光来自主体背后，正面较暗，边缘可能发亮。',
+      }[direction];
       if (height > 4.6) note += ' 光位较高，阴影会更往下压。';
-      if (height < 2) note += ' 低位光更戏剧，也更不自然。';
+      if (height < 2) note += ' 光位较低，留意脸部与身体阴影的方向。';
       readout.textContent = note;
       renderer.render(scene, camera);
     };
@@ -213,7 +235,17 @@
   };
 
   labs.forEach((root) => {
-    const scenes = [setupPerspectiveLab(root), setupLightLab(root)].filter(Boolean);
+    const scenes = [
+      [setupPerspectiveLab, '[data-three-perspective]'],
+      [setupLightLab, '[data-three-light]'],
+    ].map(([setup, selector]) => {
+      try {
+        return setup(root);
+      } catch {
+        root.querySelector(selector).textContent = '当前浏览器无法显示 3D。请使用上方平面实验，并阅读本面板的方向说明。';
+        return null;
+      }
+    }).filter(Boolean);
     const resize = () => {
       scenes.forEach((item) => {
         item.camera.aspect = item.container.clientWidth / item.container.clientHeight;
@@ -222,7 +254,8 @@
         item.update();
       });
     };
-    window.addEventListener('resize', resize);
+    const observer = new ResizeObserver(resize);
+    scenes.forEach((item) => observer.observe(item.container));
     resize();
   });
 
@@ -234,7 +267,11 @@
   const startThreeLabs = () => {
     if (threeLabStarted) return;
     threeLabStarted = true;
-    void initThreeLabs().catch((error) => console.error('Three.js 实验加载失败', error));
+    void initThreeLabs().catch(() => {
+      threeLabRoot.querySelectorAll('.three-lab__viewport').forEach((container) => {
+        container.textContent = '3D 模块未加载成功。可刷新重试，或继续使用上方平面实验。';
+      });
+    });
   };
 
   if (threeLabRoot && 'IntersectionObserver' in window) {

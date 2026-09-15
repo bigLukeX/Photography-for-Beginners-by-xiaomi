@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Step {
+  title: string;
+  description: string;
+  crop: [number, number, number, number];
+  brightness: number;
+  contrast: number;
+  saturation: number;
+}
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  author: string;
+  source: string;
+  license: string;
+  licenseUrl: string;
+  steps: Step[];
+}
+const { src, alt, author, source, license, licenseUrl, steps } = Astro.props;
+---
+
+<section class="editing-walkthrough" data-editing-walkthrough data-aspect={src.width / src.height}>
+  <h3>同一张照片，逐步检查每次调整</h3>
+  <p>先看完整 JPEG，再逐步比较。所有版本来自下方同一个文件，没有生成或替换照片中的物体。</p>
+  <div class="editing-walkthrough__frame" style={`aspect-ratio: ${src.width} / ${src.height};`} data-editing-frame>
+    <Image src={src} alt={alt} width={src.width} format="webp" quality={90} loading="lazy" data-editing-image />
+  </div>
+  <div class="lab-style-buttons" role="group" aria-label="后期处理步骤">
+    {steps.map((step, index) => (
+      <button type="button" aria-pressed={String(index === 0)} class:list={{ 'is-active': index === 0 }} data-editing-step={JSON.stringify(step)}>
+        {index + 1}. {step.title}
+      </button>
+    ))}
+  </div>
+  <p class="editing-walkthrough__readout" aria-live="polite" data-editing-readout>{steps[0]?.description}</p>
+  <p class="editing-walkthrough__values" data-editing-values>完整构图；亮度 ×1，对比 ×1，饱和度 ×1。</p>
+  <p>回看时点“原始 JPEG”，再点任何一步即可复现。<a href={src.src} download>下载本站 JPEG 跟做</a>，并保留一份未修改副本。</p>
+  <details>
+    <summary>查看本示例的完整调整记录</summary>
+    <ol>
+      {steps.map((step) => (
+        <li><strong>{step.title}</strong>：{step.description} 裁切保留区域（左、上、宽、高）为 {step.crop.map((v) => `${Math.round(v * 100)}%`).join(' / ')}；亮度 ×{step.brightness}，对比 ×{step.contrast}，饱和度 ×{step.saturation}。</li>
+      ))}
+    </ol>
+    <p>每一步列出相对原图的累计设置。网页用裁切窗口和 CSS 颜色运算完成可重复展示，数值不是手机编辑器的滑块单位，也不是拍摄曝光档数。曝光、局部高光恢复与 RAW 调整不能由这些滤镜等同替代。</p>
+  </details>
+  <p class="editing-walkthrough__credit">摄影：{author} · <a href={source}>原始来源</a> · <a href={licenseUrl}>{license}</a>。本页裁切与色调派生展示沿用该许可。这是已发布的摄影作品 JPEG，不是小米实拍或未经处理的 RAW；原作不被判为“失败样张”。</p>
+  <noscript><p>JavaScript 未开启时，显示完整原图；可按上方调整记录在自己的编辑器跟做。</p></noscript>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-editing-walkthrough]').forEach((root) => {
+    const image = root.querySelector<HTMLImageElement>('[data-editing-image]')!;
+    const frame = root.querySelector<HTMLElement>('[data-editing-frame]')!;
+    const buttons = root.querySelectorAll<HTMLButtonElement>('[data-editing-step]');
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const step = JSON.parse(button.dataset.editingStep!);
+        const [x, y, width, height] = step.crop;
+        frame.style.aspectRatio = String(Number(root.dataset.aspect) * width / height);
+        image.style.width = 100 / width + '%';
+        image.style.left = -100 * x / width + '%';
+        image.style.top = -100 * y / height + '%';
+        image.style.filter = 'brightness(' + step.brightness + ') contrast(' + step.contrast + ') saturate(' + step.saturation + ')';
+        root.querySelector('[data-editing-readout]')!.textContent = step.description;
+        root.querySelector('[data-editing-values]')!.textContent = '保留原图宽 ' + Math.round(width * 100) + '%、高 ' + Math.round(height * 100) + '%；亮度 ×' + step.brightness + '，对比 ×' + step.contrast + '，饱和度 ×' + step.saturation + '。';
+        buttons.forEach((item) => {
+          item.classList.toggle('is-active', item === button);
+          item.setAttribute('aria-pressed', String(item === button));
+        });
+      });
+    });
+  });
+</script>

@@ -1,95 +1,106 @@
 <section class="interactive-lab" data-photo-lab>
+  <noscript><p>互动需要 JavaScript；下方说明与章节练习仍可阅读。</p></noscript>
   <div class="lab-grid">
     <article class="lab-panel lab-panel--wide">
       <div class="lab-panel__header">
-        <span class="lab-panel__kicker">SVG 实验</span>
-        <h3>焦距与站位</h3>
-        <p>拖动距离和焦距，观察主体大小、背景压缩和空间关系怎样变化。</p>
+        <span class="lab-panel__kicker">空间对照</span>
+        <h3>焦距与站位：先固定一个，再改另一个</h3>
+        <p>人物和两根标尺一样高，标尺在人物后方 8 米。原地变焦会一起放大它们；后退才会改变前后大小比例。</p>
       </div>
-      <div class="lab-perspective" style="--distance-scale: 1; --focal-scale: 1; --background-scale: 1;">
-        <svg viewBox="0 0 760 360" role="img" aria-label="焦距与站位变化示意图">
-          <defs>
-            <linearGradient id="labSky" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stop-color="#c6d8dc" />
-              <stop offset="100%" stop-color="#efe0c6" />
-            </linearGradient>
-          </defs>
-          <rect width="760" height="360" rx="18" fill="url(#labSky)" />
-          <g class="lab-perspective__background">
-            <rect x="76" y="72" width="92" height="160" rx="12" fill="#76685b" opacity="0.58" />
-            <rect x="592" y="62" width="88" height="170" rx="12" fill="#4e5265" opacity="0.56" />
-            <rect x="238" y="94" width="70" height="118" rx="12" fill="#a98152" opacity="0.52" />
-            <rect x="456" y="100" width="70" height="112" rx="12" fill="#7f786e" opacity="0.5" />
+      <div class="lab-perspective">
+        <svg viewBox="0 0 760 540" role="img" aria-label="同高人物与远处标尺的投影对照">
+          <rect width="760" height="180" fill="#d1e1e4" />
+          <rect y="180" width="760" height="360" fill="#e5d3b8" />
+          <path d="M0 540 L380 180 L760 540 M380 180 V540" fill="none" stroke="#887765" stroke-width="2" />
+          <g data-perspective-background>
+            <rect x="-320" y="-180" width="40" height="180" fill="#526675" />
+            <rect x="280" y="-180" width="40" height="180" fill="#526675" />
+            <path d="M-320 -90 H-280 M280 -90 H320" stroke="#fff8e9" stroke-width="5" />
           </g>
-          <path class="lab-perspective__road" d="M 80 338 C 245 235 515 235 680 338 Z" fill="#6a5b4c" opacity="0.28" />
-          <g class="lab-perspective__subject">
-            <circle cx="380" cy="150" r="38" fill="#e9aa4e" />
-            <rect x="334" y="190" width="92" height="112" rx="34" fill="#82674e" />
-            <text x="380" y="324" text-anchor="middle" fill="#4b3520" font-size="22" font-weight="800">主体</text>
-          </g>
-          <g class="lab-perspective__camera">
-            <rect x="52" y="272" width="92" height="52" rx="14" fill="#2f2b28" opacity="0.82" />
-            <circle cx="108" cy="298" r="18" fill="#e9aa4e" />
-            <text x="98" y="350" text-anchor="middle" fill="#4b3520" font-size="16" font-weight="800">你的位置</text>
+          <g data-perspective-subject>
+            <circle cx="0" cy="-155" r="25" fill="#c66c31" />
+            <rect x="-32" y="-125" width="64" height="125" rx="20" fill="#835b3f" />
           </g>
         </svg>
       </div>
-      <div class="lab-controls">
-        <label for="lab-distance">
-          站位距离
-          <input id="lab-distance" name="distance" type="range" min="0" max="100" value="35" data-lab-distance />
-        </label>
-        <label for="lab-focal">
-          焦距倾向
-          <input id="lab-focal" name="focal" type="range" min="0" max="100" value="45" data-lab-focal />
-        </label>
+      <div class="lab-style-buttons" role="group" aria-label="焦距与站位对照预设">
+        <button type="button" data-perspective-preset="near">起点：4 米 / 50mm</button>
+        <button type="button" data-perspective-preset="zoom">原地：4 米 / 100mm</button>
+        <button type="button" data-perspective-preset="back">后退：8 米 / 100mm</button>
       </div>
-      <p class="lab-readout" data-perspective-readout>近距离会夸张透视，长焦会收窄视角并压缩背景。</p>
-    </article>
-
-    <article class="lab-panel">
-      <div class="lab-panel__header">
-        <span class="lab-panel__kicker">Canvas 实验</span>
-        <h3>快门与拖影</h3>
-        <p>模拟 `1/250s` 到 `1/4s` 的运动痕迹，理解慢门为什么会有时间感。</p>
-      </div>
-      <canvas class="lab-canvas" width="680" height="420" role="img" aria-label="人物在不同快门速度下产生拖影的模拟画面" data-shutter-canvas></canvas>
-      <div class="lab-controls">
-        <label for="shutter-speed">
-          快门速度
-          <input id="shutter-speed" name="shutter-speed" type="range" min="0" max="3" value="1" step="1" data-shutter-speed />
-        </label>
-      </div>
-      <p class="lab-readout" data-shutter-readout>当前：1/60s，轻微风险，适合站定人物和静物。</p>
-    </article>
-
-    <article class="lab-panel">
-      <div class="lab-panel__header">
-        <span class="lab-panel__kicker">Canvas 实验</span>
-        <h3>ISO、曝光与颗粒</h3>
-        <p>观察高 ISO、压暗和提亮如何改变颗粒、暗部和高光。</p>
-      </div>
-      <canvas class="lab-canvas" width="680" height="420" role="img" aria-label="ISO 与曝光补偿改变亮度和颗粒的模拟画面" data-grain-canvas></canvas>
       <div class="lab-controls lab-controls--split">
-        <label for="iso-level">
-          ISO
-          <input id="iso-level" name="iso-level" type="range" min="0" max="3" value="1" step="1" data-iso-level />
+        <label for="lab-distance">相机到人物的距离（米）
+          <input id="lab-distance" type="range" min="3" max="9" value="4" step="0.1" data-lab-distance />
         </label>
-        <label for="ev-level">
-          曝光补偿
-          <input id="ev-level" name="ev-level" type="range" min="-2" max="2" value="-1" step="1" data-ev-level />
+        <label for="lab-focal">焦距（同一画幅，mm）
+          <input id="lab-focal" type="range" min="24" max="100" value="50" step="1" data-lab-focal />
         </label>
       </div>
-      <p class="lab-readout" data-grain-readout>ISO 400，-0.3EV：轻微颗粒，适合夜景保高光。</p>
+      <p class="lab-readout" aria-live="polite" data-perspective-readout>4 米 / 50mm：远处同高标尺的像高是人物的 33%。</p>
+      <p class="lab-note">先比较前两个预设，再比较第一个与第三个。后退版本人物一样大，背景相对更大。模型不模拟镜头畸变、虚化或手机自动切换镜头。</p>
+    </article>
+
+    <article class="lab-panel">
+      <div class="lab-panel__header">
+        <span class="lab-panel__kicker">时间对照</span>
+        <h3>快门与拖影</h3>
+        <p>固定相机和人物运动速度，用其他曝光参数补偿亮度。只比较运动痕迹，不把变亮当成拖影。</p>
+      </div>
+      <canvas class="lab-canvas" width="680" height="420" role="img" aria-label="固定背景与匀速移动人物的快门对照" data-shutter-canvas></canvas>
+      <div class="lab-controls">
+        <label for="shutter-speed">快门速度
+          <input id="shutter-speed" type="range" min="0" max="3" value="1" step="1" data-shutter-speed />
+        </label>
+      </div>
+      <p class="lab-readout" aria-live="polite" data-shutter-readout>当前 1/60s：运动痕迹比 1/250s 更长。</p>
+      <p class="lab-note">同样的快门，主体越快、画面里越大，拖影越明显。真实拍摄还要区分主体运动和手抖。</p>
+    </article>
+
+    <article class="lab-panel">
+      <div class="lab-panel__header">
+        <span class="lab-panel__kicker">进光对照</span>
+        <h3>一档曝光，改变多少光？</h3>
+        <p>固定光线、光圈和 ISO，以 1/125s 为起点，只改变快门。加一档收集两倍光，减一档收集一半光。</p>
+      </div>
+      <canvas class="lab-canvas" width="680" height="420" role="img" aria-label="同一模拟场景改变进光量的亮暗对照" data-exposure-canvas></canvas>
+      <div class="lab-controls">
+        <label for="ev-level">相对起点的进光量（档）
+          <input id="ev-level" type="range" min="-2" max="2" value="0" step="1" data-ev-level />
+        </label>
+      </div>
+      <p class="lab-readout" aria-live="polite" data-exposure-readout>0 档：1 倍进光量。</p>
+      <p class="lab-note">这是线性信号乘法后转成屏幕颜色的模型，不是手机 HDR 或自动曝光补偿算法。看灯和墙面的细节怎样被截成白色。</p>
     </article>
 
     <article class="lab-panel lab-panel--wide">
       <div class="lab-panel__header">
-        <span class="lab-panel__kicker">风格实验</span>
-        <h3>白平衡与 Lofi 风格配方</h3>
-        <p>切换风格，观察色温、饱和度、反差、颗粒和高光溢出怎样组合。</p>
+        <span class="lab-panel__kicker">条件明确的 ISO 实验</span>
+        <h3>提高 ISO：提亮，还是换取更快快门？</h3>
+        <p>场景光和光圈不变。先选择比较条件，再调 ISO；噪点由收集到的光与读出噪声共同影响，ISO 不是后期颗粒开关。</p>
       </div>
-      <div class="style-lab-frame" data-style-frame>
+      <canvas class="lab-canvas" width="680" height="420" role="img" aria-label="固定快门或保持平均亮度条件下的 ISO 对照" data-grain-canvas></canvas>
+      <div class="lab-controls lab-controls--split">
+        <label for="iso-level">ISO
+          <input id="iso-level" type="range" min="0" max="3" value="0" step="1" data-iso-level />
+        </label>
+        <label for="iso-mode">比较条件
+          <select id="iso-mode" data-iso-mode>
+            <option value="matched">保持平均亮度，缩短快门</option>
+            <option value="fixed">固定 1/125s，仅提高 ISO</option>
+          </select>
+        </label>
+      </div>
+      <p class="lab-readout" aria-live="polite" data-grain-readout>ISO 100 / 1/125s：比较起点。</p>
+      <p class="lab-note">固定噪声样本、简化单色光子与读出噪声，便于观察变化。这里的强度不对应小米 15 Ultra 的实测；不同镜头、降噪、多帧合成和输出尺寸都会改变结果。</p>
+    </article>
+
+    <article class="lab-panel lab-panel--wide">
+      <div class="lab-panel__header">
+        <span class="lab-panel__kicker">风格草图</span>
+        <h3>Lofi 视觉选择</h3>
+        <p>这些名称是本课程的创作联想，不是固定摄影流派配方。切换草图后，指出它改变了颜色、反差还是轮廓。</p>
+      </div>
+      <div class="style-lab-frame" data-style-frame role="img" aria-label="比较颜色、反差、光晕与轮廓的风格草图">
         <div class="style-lab-frame__sky"></div>
         <div class="style-lab-frame__light"></div>
         <div class="style-lab-frame__figure"></div>
@@ -102,169 +113,11 @@
         <button type="button" aria-pressed="false" data-style-preset="dream">dreampop</button>
         <button type="button" aria-pressed="false" data-style-preset="shoe">shoegaze</button>
       </div>
-      <p class="lab-readout" data-style-readout>post-punk：压暗、冷色、高反差、粗颗粒。</p>
+      <p class="lab-readout" aria-live="polite" data-style-readout>选择一种视觉方向，观察哪个信息仍然可读。</p>
     </article>
   </div>
 </section>
 
-<script is:inline>
-  (() => {
-    const root = document.querySelector('[data-photo-lab]');
-    if (!root) return;
-
-    const distanceInput = root.querySelector('[data-lab-distance]');
-    const focalInput = root.querySelector('[data-lab-focal]');
-    const perspective = root.querySelector('.lab-perspective');
-    const perspectiveReadout = root.querySelector('[data-perspective-readout]');
-
-    const updatePerspective = () => {
-      const distance = Number(distanceInput.value);
-      const focal = Number(focalInput.value);
-      const distanceScale = 1.34 - distance * 0.0048;
-      const focalScale = 0.88 + focal * 0.0038;
-      const backgroundScale = 0.82 + focal * 0.006 - distance * 0.0022;
-      perspective.style.setProperty('--distance-scale', distanceScale.toFixed(3));
-      perspective.style.setProperty('--focal-scale', focalScale.toFixed(3));
-      perspective.style.setProperty('--background-scale', backgroundScale.toFixed(3));
-      const distanceText = distance < 35 ? '靠近主体：透视更夸张，前景和人物会更有压迫感。' : distance > 70 ? '站远一点：比例更自然，画面更冷静。' : '中等距离：人物和环境关系比较均衡。';
-      const focalText = focal > 65 ? ' 长焦倾向会压缩背景，让街景和人物贴得更近。' : focal < 35 ? ' 广角倾向会拉开空间，更容易出现边缘变形。' : ' 标准视角适合日常观察。';
-      perspectiveReadout.textContent = distanceText + focalText;
-    };
-
-    distanceInput.addEventListener('input', updatePerspective);
-    focalInput.addEventListener('input', updatePerspective);
-    updatePerspective();
-
-    const shutterCanvas = root.querySelector('[data-shutter-canvas]');
-    const shutterInput = root.querySelector('[data-shutter-speed]');
-    const shutterReadout = root.querySelector('[data-shutter-readout]');
-    const shutterLabels = ['1/250s', '1/60s', '1/15s', '1/4s'];
-    const shutterNotes = [
-      '定住动作，适合白天街拍和抓拍。',
-      '轻微风险，适合站定人物和静物。',
-      '人物开始拖开，适合模糊记忆和夜路。',
-      '明显慢门，车灯、人影和手抖都会变成画面语言。',
-    ];
-
-    const drawShutter = () => {
-      const ctx = shutterCanvas.getContext('2d');
-      const level = Number(shutterInput.value);
-      const width = shutterCanvas.width;
-      const height = shutterCanvas.height;
-      ctx.clearRect(0, 0, width, height);
-      const grad = ctx.createLinearGradient(0, 0, 0, height);
-      grad.addColorStop(0, '#273043');
-      grad.addColorStop(1, '#69534f');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = 'rgba(255,255,255,0.08)';
-      for (let i = 0; i < 8; i++) ctx.fillRect(40 + i * 78, 56 + (i % 3) * 22, 42, 12);
-      ctx.fillStyle = 'rgba(34,30,28,0.42)';
-      ctx.beginPath();
-      ctx.moveTo(40, height - 38);
-      ctx.bezierCurveTo(210, 250, 470, 250, 640, height - 38);
-      ctx.lineTo(640, height);
-      ctx.lineTo(40, height);
-      ctx.closePath();
-      ctx.fill();
-      const trails = [0, 2, 6, 13][level];
-      for (let i = trails; i >= 0; i--) {
-        const alpha = i === 0 ? 0.95 : 0.12 + (trails - i) * 0.035;
-        const offset = i * 12;
-        ctx.fillStyle = `rgba(233, 170, 78, ${alpha})`;
-        ctx.beginPath();
-        ctx.ellipse(348 - offset, 180, 28, 34, -0.15, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = `rgba(245, 236, 222, ${alpha * 0.9})`;
-        ctx.fillRect(326 - offset, 218, 48, 96);
-      }
-      const lightAlpha = 0.28 + level * 0.18;
-      ctx.strokeStyle = `rgba(255, 222, 141, ${lightAlpha})`;
-      ctx.lineWidth = 8 + level * 5;
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(80, 112);
-      ctx.bezierCurveTo(230, 118 + level * 18, 420, 80 + level * 22, 620, 118);
-      ctx.stroke();
-      shutterReadout.textContent = `当前：${shutterLabels[level]}，${shutterNotes[level]}`;
-    };
-
-    shutterInput.addEventListener('input', drawShutter);
-    drawShutter();
-
-    const grainCanvas = root.querySelector('[data-grain-canvas]');
-    const isoInput = root.querySelector('[data-iso-level]');
-    const evInput = root.querySelector('[data-ev-level]');
-    const grainReadout = root.querySelector('[data-grain-readout]');
-    const isoLabels = ['ISO 100', 'ISO 400', 'ISO 800', 'ISO 1600'];
-    const evLabels = ['-1EV', '-0.7EV', '-0.3EV', '+0.3EV', '+1EV'];
-
-    const drawGrain = () => {
-      const ctx = grainCanvas.getContext('2d');
-      const width = grainCanvas.width;
-      const height = grainCanvas.height;
-      const iso = Number(isoInput.value);
-      const ev = Number(evInput.value);
-      const exposure = 1 + ev * 0.16;
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = `rgb(${Math.max(18, 42 * exposure)}, ${Math.max(20, 44 * exposure)}, ${Math.max(23, 48 * exposure)})`;
-      ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = `rgba(255, 218, 138, ${0.48 + ev * 0.08})`;
-      ctx.beginPath();
-      ctx.arc(142, 112, 54 + ev * 6, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.shadowColor = 'rgba(255, 218, 138, 0.68)';
-      ctx.shadowBlur = 28 + ev * 10;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-      ctx.fillStyle = 'rgba(228, 166, 80, 0.72)';
-      ctx.fillRect(420, 170, 82, 142);
-      ctx.fillStyle = 'rgba(245, 236, 222, 0.58)';
-      ctx.fillRect(388, 290, 156, 34);
-      const image = ctx.getImageData(0, 0, width, height);
-      const data = image.data;
-      const grain = [8, 22, 42, 68][iso];
-      for (let i = 0; i < data.length; i += 4) {
-        const noise = (Math.random() - 0.5) * grain;
-        data[i] = Math.max(0, Math.min(255, data[i] + noise));
-        data[i + 1] = Math.max(0, Math.min(255, data[i + 1] + noise));
-        data[i + 2] = Math.max(0, Math.min(255, data[i + 2] + noise));
-      }
-      ctx.putImageData(image, 0, 0);
-      grainReadout.textContent = `${isoLabels[iso]}，${evLabels[ev + 2]}：${iso > 1 ? '颗粒更明显，适合 lofi 和粗粝夜景。' : '画面更干净，适合基础练习和真实记录。'}`;
-    };
-
-    isoInput.addEventListener('input', drawGrain);
-    evInput.addEventListener('input', drawGrain);
-    drawGrain();
-
-    const styleFrame = root.querySelector('[data-style-frame]');
-    const styleReadout = root.querySelector('[data-style-readout]');
-    const presets = {
-      postpunk: 'postpunk',
-      emo: 'emo',
-      dream: 'dream',
-      shoe: 'shoe',
-    };
-    const styleNotes = {
-      postpunk: 'post-punk：压暗、冷色、高反差、粗颗粒。',
-      emo: 'midwest emo：低饱和、柔和光线、空场和日常残响。',
-      dream: 'dreampop：柔光、高光漂浮、低清晰度和偏色记忆。',
-      shoe: 'shoegaze：拖影、溢出、颗粒和人物被光吞没。',
-    };
-    root.querySelectorAll('[data-style-preset]').forEach((button) => {
-      button.addEventListener('click', () => {
-        const preset = presets[button.dataset.stylePreset];
-        styleFrame.dataset.style = preset;
-        styleReadout.textContent = styleNotes[preset];
-        root.querySelectorAll('[data-style-preset]').forEach((item) => {
-          const isActive = item === button;
-          item.classList.toggle('is-active', isActive);
-          item.setAttribute('aria-pressed', String(isActive));
-        });
-      });
-    });
-    const firstPreset = root.querySelector('[data-style-preset="postpunk"]');
-    firstPreset?.click();
-  })();
+<script>
+  import '../scripts/interactive-lab.js';
 </script>

@@ -92,12 +92,16 @@
 - `SampleGallery`
 - `CourseRoadmap`
 - `GeneratedLessonVisual`
+- `ImageZoom`
+- `EditingWalkthrough`
+
+`PracticeCard` 可按章传入 `core`、`challenge`、`reshoot`；真实作业必须明确核心版的拍摄与提交内容，不能默认取列表第一项。`ImageZoom` 保留原图比例并支持实际尺寸查看；`EditingWalkthrough` 用同源 JPEG 展示可撤销的累计处理步骤。
 
 如果继续扩写，后面更可能需要新增：
 
 - 风格关键词索引
 - 用户作业重拍案例
-- 后期前后对比示意
+- 经授权的 RAW 与局部调整案例（复用现有后期对照组件）
 
 ## 6. 章节扩写模板建议
 
@@ -152,7 +156,7 @@
 
 中优先级：
 
-1. 给第 11 章补更细的可撤销调色流程
+1. 在已完成的基础后期对照中追加真实 RAW 与局部调整流程
 2. 给高级篇补同一底片的不同后期方向
 3. 扩展真实样张，但必须同步图片许可归档
 
