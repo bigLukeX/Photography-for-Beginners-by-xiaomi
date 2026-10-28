@@ -21,6 +21,9 @@ const { src, label } = Astro.props;
     const image = dialog.querySelector('img')!;
     const sizeButton = dialog.querySelector<HTMLButtonElement>('[data-size]')!;
     const caption = dialog.querySelector('.photo-zoom__caption')!;
+    image.addEventListener('load', () => {
+      caption.textContent = `${image.alt} 文件尺寸：${image.naturalWidth} × ${image.naturalHeight} 像素。`;
+    });
     let opener: HTMLAnchorElement | undefined;
     links.forEach((link) => {
       link.addEventListener('click', (event) => {

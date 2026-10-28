@@ -2,14 +2,34 @@
 interface Props {
   title: string;
   intro: string;
+  columns?: string[];
+  rows?: string[][];
 }
 
-const { title, intro } = Astro.props;
+const { title, intro, columns = [], rows = [] } = Astro.props;
 ---
 
 <section class="param-card">
   <div class="param-card__label">本章参数卡</div>
   <h3>{title}</h3>
   <p>{intro}</p>
+  {columns.length > 0 && (
+    <table class="param-card__table" role="table" aria-label={title}>
+      <thead role="rowgroup">
+        <tr role="row">{columns.map((column) => <th scope="col" role="columnheader">{column}</th>)}</tr>
+      </thead>
+      <tbody role="rowgroup">
+        {rows.map((row) => (
+          <tr role="row">
+            {row.map((value, index) => index === 0 ? (
+              <th scope="row" role="rowheader"><span class="param-card__field" aria-hidden="true">{columns[index]}</span><span>{value}</span></th>
+            ) : (
+              <td role="cell"><span class="param-card__field" aria-hidden="true">{columns[index]}</span><span>{value}</span></td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
   <slot />
 </section>

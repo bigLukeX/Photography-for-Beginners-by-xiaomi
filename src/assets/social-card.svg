@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fbf6ed"/>
+  <circle cx="1080" cy="110" r="330" fill="#f6e1c3"/>
+  <circle cx="1130" cy="570" r="300" fill="#dde7e9"/>
+  <rect x="72" y="80" width="280" height="48" rx="24" fill="#f8dfbb"/>
+  <g font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#392e26">
+    <text x="96" y="113" font-size="24" font-weight="600">19 章 · 可练习的摄影课</text>
+    <text x="72" y="237" font-size="62" font-weight="700">小米 15 Ultra</text>
+    <text x="72" y="323" font-size="72" font-weight="700">摄影教程</text>
+    <text x="76" y="414" font-size="32">从一台手机开始，把摄影学扎实。</text>
+    <text x="76" y="537" font-size="24" fill="#796552">看光 · 构图 · 参数 · 后期 · 个人系列</text>
+  </g>
+  <g transform="translate(840 220)" fill="none" stroke="#67594c" stroke-width="9">
+    <rect width="220" height="170" rx="28" fill="#fffaf2"/>
+    <path d="M45 0v-25h95V0"/>
+    <circle cx="110" cy="86" r="57" fill="#dce8eb"/>
+    <circle cx="110" cy="86" r="35"/>
+    <circle cx="185" cy="30" r="6" fill="#dc8b4b" stroke="none"/>
+  </g>
+</svg>

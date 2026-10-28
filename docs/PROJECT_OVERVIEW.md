@@ -95,7 +95,17 @@
 - `ImageZoom`
 - `EditingWalkthrough`
 
-`PracticeCard` 可按章传入 `core`、`challenge`、`reshoot`；真实作业必须明确核心版的拍摄与提交内容，不能默认取列表第一项。`ImageZoom` 保留原图比例并支持实际尺寸查看；`EditingWalkthrough` 用同源 JPEG 展示可撤销的累计处理步骤。
+- `FocalLengthDemo`：焦段、站位与取景范围的关系示意
+- `FoundationDemo`：对焦、景深与曝光等通用基础示意
+- `PortraitDemo`：人像背景、距离与姿态示意
+- `StreetMomentDemo`：街拍等待、人物位置与时机示意
+- `LandscapeNightDemo`：风景层次与夜景亮暗取舍示意
+- `FoodStillDemo`：食物静物的光线与画面减法示意
+- `ManualControlDemo`：快门、ISO 和白平衡的控制关系示意
+- `PostProcessDemo`：选片与基础后期步骤示意
+- `WorkflowDemo`：拍摄、筛选、整理与复盘的流程示意
+
+`PracticeCard` 可按章传入 `core`、`challenge`、`reshoot` 和 `reshootLabel`；真实作业必须明确核心版的拍摄与提交内容，不能默认取列表第一项。`ParamCard` 可用 `columns`、`rows` 渲染语义表格，并在窄容器中显示字段标签；`ImageZoom` 保留完整构图，实际尺寸对应本站优化文件；`EditingWalkthrough` 用同源 JPEG 展示可撤销的累计处理步骤。
 
 如果继续扩写，后面更可能需要新增：
 

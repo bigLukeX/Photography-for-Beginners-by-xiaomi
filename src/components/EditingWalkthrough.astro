@@ -26,7 +26,7 @@ const { src, alt, author, source, license, licenseUrl, steps } = Astro.props;
   <h3>同一张照片，逐步检查每次调整</h3>
   <p>先看完整 JPEG，再逐步比较。所有版本来自下方同一个文件，没有生成或替换照片中的物体。</p>
   <div class="editing-walkthrough__frame" style={`aspect-ratio: ${src.width} / ${src.height};`} data-editing-frame>
-    <Image src={src} alt={alt} width={src.width} format="webp" quality={90} loading="lazy" data-editing-image />
+    <Image src={src} alt={alt} width={src.width} widths={[480, 800, src.width]} sizes="(max-width: 49.99rem) calc(100vw - 4rem), (max-width: 64rem) calc(100vw - 22rem), 43rem" format="webp" quality={90} loading="lazy" data-editing-image />
   </div>
   <div class="lab-style-buttons" role="group" aria-label="后期处理步骤">
     {steps.map((step, index) => (
@@ -37,7 +37,7 @@ const { src, alt, author, source, license, licenseUrl, steps } = Astro.props;
   </div>
   <p class="editing-walkthrough__readout" aria-live="polite" data-editing-readout>{steps[0]?.description}</p>
   <p class="editing-walkthrough__values" data-editing-values>完整构图；亮度 ×1，对比 ×1，饱和度 ×1。</p>
-  <p>回看时点“原始 JPEG”，再点任何一步即可复现。<a href={src.src} download>下载本站 JPEG 跟做</a>，并保留一份未修改副本。</p>
+  <p>回看时点“原始 JPEG”，再点任何一步即可复现。<a href={src.src} download>下载本站 {src.width} × {src.height} JPEG 跟做</a>，并保留一份未修改副本；摄影师发布的文件见下方原始来源。</p>
   <details>
     <summary>查看本示例的完整调整记录</summary>
     <ol>

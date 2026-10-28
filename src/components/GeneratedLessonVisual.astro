@@ -24,7 +24,16 @@ const {
   eager = false,
 } = Astro.props;
 const isTriptych = labels.length === 3;
-const optimized = isTriptych ? await getImage({ src, width: src.width, format: 'webp', quality: 84 }) : null;
+// Read dimensions from the processed result: reading the imported asset's
+// properties directly tells Astro to retain the unoptimized original too.
+const originalSize = await getImage({ src, format: 'webp', quality: 84 });
+const sourceWidth = Number(originalSize.attributes.width);
+const sourceHeight = Number(originalSize.attributes.height);
+const zoom = sourceWidth > 1600
+  ? await getImage({ src, width: 1600, format: 'webp', quality: 84 })
+  : originalSize;
+const panelWidth = Math.round(sourceWidth / 3);
+const positions = ['left', 'center', 'right'] as const;
 ---
 
 <figure class="generated-lesson-visual">
@@ -34,10 +43,20 @@ const optimized = isTriptych ? await getImage({ src, width: src.width, format: '
       <div class="generated-lesson-visual__panels" tabindex="0" role="group" aria-label={alt}>
         {labels.map((label, index) => (
           <div class="generated-lesson-visual__panel">
-            <ImageZoom src={src.src} label={`AI 教学模拟：${alt}`}>
-              <svg viewBox={`${index * src.width / 3} 0 ${src.width / 3} ${src.height}`} role="img" aria-label={`${index + 1}. ${label.title}：${label.detail}`}>
-                <image href={optimized!.src} width={src.width} height={src.height} />
-              </svg>
+            <ImageZoom src={zoom.src} label={`AI 教学模拟：${alt}`}>
+              <Image
+                src={src}
+                alt={`${index + 1}. ${label.title}：${label.detail}（AI 教学模拟）`}
+                width={panelWidth}
+                height={sourceHeight}
+                widths={[256, 384, panelWidth]}
+                sizes="(max-width: 49.99rem) calc(86vw - 1.72rem), (max-width: 64rem) calc(86vw - 17.2rem), 15rem"
+                fit="cover"
+                position={positions[index]}
+                format="webp"
+                quality={84}
+                loading={eager ? 'eager' : 'lazy'}
+              />
             </ImageZoom>
             <p><strong>{index + 1}. {label.title}</strong>{label.detail}</p>
           </div>
@@ -45,8 +64,8 @@ const optimized = isTriptych ? await getImage({ src, width: src.width, format: '
       </div>
     </>
   ) : (
-    <ImageZoom src={src.src} label={`AI 教学模拟：${alt}`}>
-      <Image src={src} alt={alt} width={src.width} quality={84} format="webp" loading={eager ? 'eager' : 'lazy'} />
+    <ImageZoom src={zoom.src} label={`AI 教学模拟：${alt}`}>
+      <Image src={src} alt={alt} width={Math.min(1600, sourceWidth)} widths={[480, 768, 1280, Math.min(1600, sourceWidth)]} sizes="(max-width: 49.99rem) calc(100vw - 2rem), (max-width: 64rem) calc(100vw - 20rem), 45rem" quality={84} format="webp" loading={eager ? 'eager' : 'lazy'} />
     </ImageZoom>
   )}
   {!isTriptych && labels.length > 0 && (
@@ -64,5 +83,5 @@ const optimized = isTriptych ? await getImage({ src, width: src.width, format: '
       ))}
     </div>
   )}
-  <figcaption>{note} 点图后可切换实际尺寸查看。</figcaption>
+  <figcaption>{note} 点图查看完整大图；“实际尺寸”显示本站优化文件的像素尺寸。</figcaption>
 </figure>

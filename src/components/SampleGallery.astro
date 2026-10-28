@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import ImageZoom from './ImageZoom.astro';
 
 import leadingLines from '../assets/samples/leading-lines.jpg';
@@ -149,17 +149,30 @@ const samples = [
 const selected = group === 'all'
   ? samples
   : samples.filter((sample) => sample.groups.some((sampleGroup) => sampleGroup === group));
+const images = await Promise.all(selected.map(async (sample) => {
+  const originalSize = await getImage({ src: sample.image, format: 'webp', quality: 80 });
+  const sourceWidth = Number(originalSize.attributes.width);
+  return {
+    ...sample,
+    width: Math.min(1280, sourceWidth),
+    zoom: sourceWidth > 1600
+      ? await getImage({ src: sample.image, width: 1600, format: 'webp', quality: 80 })
+      : originalSize,
+  };
+}));
 ---
 
 <div class="sample-gallery" data-sample-group={group}>
-  {selected.map((sample) => (
+  {images.map((sample) => (
     <figure class="sample-photo">
       <div class="sample-photo__media">
-        <ImageZoom src={sample.image.src} label={`${sample.title}。摄影：${sample.author}，${sample.license}。`}>
+        <ImageZoom src={sample.zoom.src} label={`${sample.title}。摄影：${sample.author}，${sample.license}。本站优化版，原始文件见来源链接。`}>
         <Image
           src={sample.image}
           alt={sample.alt}
-          width={1280}
+          width={sample.width}
+          widths={[360, 640, 960, 1280]}
+          sizes="(max-width: 49.99rem) calc(100vw - 2rem), (max-width: 64rem) calc(100vw - 20rem), 22rem"
           quality={80}
           format="webp"
           loading="lazy"
@@ -171,7 +184,7 @@ const selected = group === 'all'
         <strong>{sample.title}</strong>
         <p>{sample.note}</p>
         <small>
-          摄影：{sample.author} · <a href={sample.source}>{sample.license} / 查看原始文件</a> · 点图放大，保留完整构图
+          摄影：{sample.author} · <a href={sample.source}>{sample.license} / 查看原始文件</a> · 点图查看大图，保留完整构图；实际尺寸对应本站优化版
         </small>
       </figcaption>
     </figure>

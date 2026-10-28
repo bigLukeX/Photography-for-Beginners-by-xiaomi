@@ -69,9 +69,13 @@ body {
 }
 
 .chapter-card {
+  display: block;
   padding: 1.15rem;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
+
+.sl-markdown-content a.chapter-card { color: var(--sl-color-text); text-decoration: none; }
+.chapter-card:focus-visible { outline: 3px solid var(--sl-color-accent); outline-offset: 3px; }
 
 .chapter-card:hover {
   transform: translateY(-4px);
@@ -111,6 +115,7 @@ body {
 }
 
 .param-card {
+  container: parameters / inline-size;
   border-color: rgba(74, 128, 188, 0.22);
   background:
     linear-gradient(180deg, rgba(244, 249, 252, 0.92), rgba(248, 242, 234, 0.88)),
@@ -153,6 +158,45 @@ body {
   overflow-x: auto;
   width: 100%;
   font-size: 0.94rem;
+}
+
+.sl-markdown-content .param-card__table {
+  display: table;
+  table-layout: fixed;
+  min-width: 0;
+}
+.param-card__table th,
+.param-card__table td { overflow-wrap: anywhere; }
+.param-card__field { display: none; }
+
+@container parameters (max-width: 38rem) {
+  .sl-markdown-content .param-card__table { display: block; overflow: visible; }
+  .param-card__table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .param-card__table tbody { display: grid; gap: 1rem; }
+  .param-card__table tbody tr {
+    display: block;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+  .param-card__table tbody th,
+  .param-card__table tbody td {
+    display: grid;
+    grid-template-columns: 6em minmax(0, 1fr);
+    gap: 0.65rem;
+    padding: 0.7rem;
+    margin: 0;
+  }
+  .param-card__table tbody td:last-child { border-bottom: 0; }
+  .param-card__field { display: block; font-weight: 600; }
 }
 
 .do-dont-grid {
@@ -2020,6 +2064,10 @@ body {
   color: #3f3023;
 }
 
+.practice-card__checklist { margin-top: 1.2rem; }
+.practice-card__checklist h4 { margin: 0; }
+.practice-card__choice { font-weight: 600; }
+
 .course-roadmap {
   margin: 1.6rem 0 2.6rem;
 }
@@ -2524,13 +2572,6 @@ body {
     left: 32%;
   }
 
-  .param-card {
-    overflow-x: auto;
-  }
-
-  .param-card table {
-    min-width: 36rem;
-  }
 }
 
 .image-zoom-link { display: block; cursor: zoom-in; }
@@ -2546,7 +2587,7 @@ body {
   gap: 1px;
 }
 .generated-lesson-visual__panel { min-width: 0; margin: 0; }
-.generated-lesson-visual__panel svg { display: block; width: 100%; height: auto; }
+.generated-lesson-visual__panel img { display: block; width: 100%; height: auto; }
 .generated-lesson-visual__panel p { margin: 0; padding: 0.85rem; font-size: 0.88rem; color: #67594d; }
 .generated-lesson-visual__panel strong { display: block; font-size: 1rem; color: #3d3025; margin-bottom: 0.35rem; }
 .photo-zoom {

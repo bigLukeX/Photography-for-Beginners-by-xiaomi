@@ -6,25 +6,35 @@ interface Props {
   core?: string;
   challenge?: string;
   reshoot?: string;
+  reshootLabel?: string;
 }
 
 const {
   title, intro, tiered = true,
   core = '选一个拍摄问题，完成调整前后对照，保留两张并写一句取舍。',
-  challenge = '按本卡清单完成拍摄与选择，数量和成组要求以本章任务为准。',
-  reshoot = '根据一条关键反馈，只改一个变量重拍，并与初拍并排比较。',
+  challenge = '有更多时间时，按下方完整挑战清单完成拍摄与选择；不需要再叠加核心版的数量。',
+  reshoot = '按本章练习目标自评，结合自检或点评提示选一个最影响意图的问题；只改一个变量重拍，与初拍并排比较。不必等待外部回复。',
+  reshootLabel = '点评后重拍',
 } = Astro.props;
 ---
 
 <section class="practice-card">
   <h3>{title}</h3>
   <p>{intro}</p>
-  <slot />
+  {tiered && (
+    <p class="practice-card__choice">先选一种完成方式：时间少做核心版，有余力再做完整挑战。</p>
+  )}
   {tiered && (
     <div class="practice-card__modes" aria-label="作业完成层级">
       <span><strong>20 分钟核心版</strong>{core}</span>
       <span><strong>完整挑战</strong>{challenge}</span>
-      <span><strong>点评后重拍</strong>{reshoot}</span>
+      <span><strong>{reshootLabel}</strong>{reshoot}</span>
     </div>
   )}
+  {tiered ? (
+    <div class="practice-card__checklist">
+      <h4>完整挑战清单</h4>
+      <slot />
+    </div>
+  ) : <slot />}
 </section>

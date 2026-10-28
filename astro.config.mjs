@@ -4,16 +4,27 @@ import starlight from '@astrojs/starlight';
 const repository = process.env.GITHUB_REPOSITORY;
 const [owner, repo] = repository ? repository.split('/') : [];
 const isGitHubActions = process.env.GITHUB_ACTIONS === 'true' && owner && repo;
+const site = process.env.SITE_URL || (owner ? `https://${owner}.github.io` : 'https://biglukex.github.io');
+const base = isGitHubActions ? `/${repo}/` : '/';
+const socialImage = new URL(`${base}social-card.png`, site).href;
 
 export default defineConfig({
-  site: process.env.SITE_URL || (owner ? `https://${owner}.github.io` : 'https://example.com'),
-  base: isGitHubActions ? `/${repo}/` : '/',
+  site,
+  base,
   integrations: [
     starlight({
       title: '小米 15 Ultra 摄影教程',
       description: '从手机出发，学习可迁移到相机的摄影基础、拍摄判断和创作习惯。',
       tagline: '从一台手机开始，把摄影学扎实。',
       favicon: '/favicon.svg',
+      head: [
+        { tag: 'meta', attrs: { property: 'og:image', content: socialImage } },
+        { tag: 'meta', attrs: { property: 'og:image:width', content: '1200' } },
+        { tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
+        { tag: 'meta', attrs: { property: 'og:image:alt', content: '小米 15 Ultra 摄影教程：从一台手机开始，把摄影学扎实' } },
+        { tag: 'meta', attrs: { name: 'twitter:image', content: socialImage } },
+        { tag: 'meta', attrs: { name: 'twitter:image:alt', content: '小米 15 Ultra 摄影教程：从一台手机开始，把摄影学扎实' } },
+      ],
       customCss: ['/src/styles/custom.css'],
       lastUpdated: true,
       disable404Route: true,

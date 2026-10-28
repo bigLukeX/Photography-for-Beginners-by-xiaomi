@@ -92,11 +92,24 @@
 - `CourseRoadmap`
 - `GeneratedLessonVisual`
 
+- `FocalLengthDemo`：焦段、站位与取景范围的关系示意
+- `FoundationDemo`：对焦、景深与曝光等通用基础示意
+- `PortraitDemo`：人像背景、距离与姿态示意
+- `StreetMomentDemo`：街拍等待、人物位置与时机示意
+- `LandscapeNightDemo`：风景层次与夜景亮暗取舍示意
+- `FoodStillDemo`：食物静物的光线与画面减法示意
+- `ManualControlDemo`：快门、ISO 和白平衡的控制关系示意
+- `PostProcessDemo`：选片与基础后期步骤示意
+- `WorkflowDemo`：拍摄、筛选、整理与复盘的流程示意
+- `ChapterCard`：可点击的首页章节预览卡片
+- `ImageZoom`：优化版大图、文件像素尺寸与键盘退出
+- `EditingWalkthrough`：同源实拍 JPEG 的可撤回后期对照与下载跟做
+
 如果新增组件，目标应该是“可在后面章节复用”，而不是只为单一页面写死。
 
 互动实验室可以使用少量页面专用逻辑。`Three.js` 只用于空间、透视和光线方向这类平面图难讲清的问题，不要把所有示意都 3D 化。
 
-`PracticeCard` 默认显示“20 分钟核心版 / 完整挑战 / 点评后重拍”。只有练习说明页这类不是真正作业的卡片，才传 `tiered={false}`。
+`PracticeCard` 默认显示“20 分钟核心版 / 完整挑战 / 点评后重拍”。只有练习说明页这类不是真正作业的卡片，才传 `tiered={false}`。卡内子项明确归入完整挑战；选片、后期练习可用 `reshootLabel` 标明重选或重修，重做无需等待外部点评。
 
 真实样张必须同时满足：页面显示作者、许可和原始链接，并同步维护 `docs/IMAGE_CREDITS.md`。示意图负责解释变量，真实样张负责训练判断，不要用其中一种完全替代另一种。
 
@@ -118,7 +131,7 @@ AI 生成的教学图必须在页面明确标注为模拟图，不得描述成�
 ### 样式
 
 - 统一在 `src/styles/custom.css` 里维护
-- 响应式逻辑已经存在，新增模块时要补手机布局
+- 响应式逻辑已经存在，新增模块时要补手机布局；参数表用 `ParamCard` 的 `columns`、`rows`，并按内容容器宽度验证堆叠布局
 - 不要默认依赖桌面双栏布局，小屏上要能顺畅阅读
 
 ### 内容文件
@@ -190,7 +203,7 @@ npm run preview
 
 如果你是新接手这个项目的 AI，建议先做：
 
-1. 读 [README.md](/Users/nickxy/Desktop/photograph/README.md)
-2. 读 [docs/PROJECT_OVERVIEW.md](/Users/nickxy/Desktop/photograph/docs/PROJECT_OVERVIEW.md)
+1. 读 [README.md](./README.md)
+2. 读 [docs/PROJECT_OVERVIEW.md](./docs/PROJECT_OVERVIEW.md)
 3. 看 `01`、`07`、`13`、`16` 章的写法
 4. 再开始补案例、插图、作品页或新的风格练习

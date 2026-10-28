@@ -18,6 +18,8 @@ AI 生成的教学模拟图不属于第三方样张，也不列在本表中；�
 | `rain-window.jpg` | W.carter | CC BY-SA 4.0 | [Four versions of a floodlight through rain on a window](https://commons.wikimedia.org/wiki/File:Four_versions_of_a_floodlight_through_rain_on_a_window.jpg) |
 | `ordinary-street.jpg` | Frank Kidner | CC BY-SA 4.0 | [Urban landscape and everyday life, Aleppo](https://commons.wikimedia.org/wiki/File:Urban_Landscape_and_Scenes_of_Everyday_Life,_Aleppo_(%D8%AD%D9%84%D8%A8),_Syria_-_Street_scene_-_PHBZ024_2016_0416_-_Dumbarton_Oaks.jpg) |
 
+发布处理：真实样张保留完整构图，构建时输出多个尺寸的 WebP；放大查看显示本站优化版，原始文件仍通过表中来源访问。选片专题复用 `motion-4/5/6.jpg`，不是同底片的不同处理版本。
+
 许可证说明：
 
 后期专题复用 `route-66.jpg`，通过 `EditingWalkthrough` 在网页中演示裁切、亮度、对比与饱和度变化。该派生展示沿用 CC BY-SA 4.0，页面保留作者、原始来源、许可链接和改动说明；未生成替代场景，也未把发布的 JPEG 冒充 RAW 原片。

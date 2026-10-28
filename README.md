@@ -28,7 +28,7 @@
 - 主线专题：焦距与透视、曝光、色彩、选片、后期和组图叙事
 - 按需专题：真实样张阅读、专业模式工具、简易补光与拍摄伦理
 - 高级专题：日式胶片风格，覆盖清透日常、昭和暖旧和雨夜青绿三条路线
-- 11 组在用的 AI 教学模拟图，补足基础、题材和高级创作现场；另保留 1 组历史资产归档
+- 11 组在用的 AI 教学模拟图，补足基础、题材和高级创作现场；另在文档保留 1 组停用资产的历史记录
 - 逐章具体的 20 分钟核心作业、自评/外部点评模板和“拍摄 → 点评 → 重拍”闭环
 - 同源实拍 JPEG 后期步骤对照，可撤回、查看累计调整记录并下载跟做
 
@@ -87,25 +87,25 @@
 
 关键文件：
 
-- [astro.config.mjs](/Users/nickxy/Desktop/photograph/astro.config.mjs)
-- [src/content.config.ts](/Users/nickxy/Desktop/photograph/src/content.config.ts)
-- [src/content/docs/index.mdx](/Users/nickxy/Desktop/photograph/src/content/docs/index.mdx)
-- [src/styles/custom.css](/Users/nickxy/Desktop/photograph/src/styles/custom.css)
-- [00-摄影教程目录.md](/Users/nickxy/Desktop/photograph/00-摄影教程目录.md)
-- [docs/IMAGE_CREDITS.md](/Users/nickxy/Desktop/photograph/docs/IMAGE_CREDITS.md)
-- [docs/VISUAL_AUDIT.md](/Users/nickxy/Desktop/photograph/docs/VISUAL_AUDIT.md)
-- [docs/AI_IMAGE_ASSETS.md](/Users/nickxy/Desktop/photograph/docs/AI_IMAGE_ASSETS.md)
+- [astro.config.mjs](./astro.config.mjs)
+- [src/content.config.ts](./src/content.config.ts)
+- [src/content/docs/index.mdx](./src/content/docs/index.mdx)
+- [src/styles/custom.css](./src/styles/custom.css)
+- [00-摄影教程目录.md](./00-摄影教程目录.md)
+- [docs/IMAGE_CREDITS.md](./docs/IMAGE_CREDITS.md)
+- [docs/VISUAL_AUDIT.md](./docs/VISUAL_AUDIT.md)
+- [docs/AI_IMAGE_ASSETS.md](./docs/AI_IMAGE_ASSETS.md)
 
 ## 可复用内容组件
 
 当前已经有这些组件：
 
 - `ChapterCard`
-  首页章节预览卡片
+  可点击的首页章节预览卡片
 - `PracticeCard`
   带核心版、完整挑战和点评后重拍提示的练习任务卡片
 - `ParamCard`
-  各章节参数起点、参数表和拍摄配方卡片
+  各章节参数起点与拍摄配方；参数表按容器宽度切换为堆叠卡片
 - `BridgeNote`
   “迁移到相机”提示卡片
 - `DoDontCard`
@@ -140,6 +140,16 @@
   为真实样张和模拟图提供大图、实际尺寸及键盘退出
 - `EditingWalkthrough`
   复用同一个真实图像文件，按明确步骤演示裁切与颜色调整
+
+- `FocalLengthDemo`：焦段、站位与取景范围的关系示意
+- `FoundationDemo`：对焦、景深与曝光等通用基础示意
+- `PortraitDemo`：人像背景、距离与姿态示意
+- `StreetMomentDemo`：街拍等待、人物位置与时机示意
+- `LandscapeNightDemo`：风景层次与夜景亮暗取舍示意
+- `FoodStillDemo`：食物静物的光线与画面减法示意
+- `ManualControlDemo`：快门、ISO 和白平衡的控制关系示意
+- `PostProcessDemo`：选片与基础后期步骤示意
+- `WorkflowDemo`：拍摄、筛选、整理与复盘的流程示意
 
 这套组件的目标不是做成“前端组件库”，而是让教程能更稳定地扩写，避免每章都从零做页面结构。
 
@@ -232,5 +242,5 @@ http://localhost:4321
 
 如果是人类或其他 AI 要继续接手这个项目，建议先看：
 
-- [AGENTS.md](/Users/nickxy/Desktop/photograph/AGENTS.md)
-- [docs/PROJECT_OVERVIEW.md](/Users/nickxy/Desktop/photograph/docs/PROJECT_OVERVIEW.md)
+- [AGENTS.md](./AGENTS.md)
+- [docs/PROJECT_OVERVIEW.md](./docs/PROJECT_OVERVIEW.md)
